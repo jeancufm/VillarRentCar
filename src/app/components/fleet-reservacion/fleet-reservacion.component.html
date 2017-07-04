@@ -1,0 +1,42 @@
+
+  <div class="container main-container">
+    <div>
+    <div class="row">
+      <div class="col-md-6" *ngIf="country">
+          <h6 class="text-success">País</h6>
+          <h5>{{ country.name }}</h5>
+      </div>
+      <div class="col-md-6">
+        <h6 class="text-primary">Flotas de vehiculos</h6>
+            <select class="btn btn-secondary dropdown-toggle" (change)="SelectFleet($event.target.value)">
+            <option  [value]="item.id"
+                     [selected]= "item.name == _ReservacionService.reservacion.fleetId"
+                     *ngFor="let item of fleet">{{ item.name }}</option>
+          </select>
+      </div>
+    </div>
+    <div *ngIf="fleet">
+      <router-outlet></router-outlet>
+      <h6><small style="color:green;">{{fleet.TipoVehiculo}}</small></h6>
+      <hr>
+      <div class="card-columns">
+        <div class="card animated fadeIn fast" *ngFor="let vehiculo of vehicles">
+          <div class="card-block">
+            <img class="card-img-top img-thumbnail" [src]="'assets/img/fleet/jeep.jpg'">
+            <hr>
+            <h6 class="card-title">{{ vehiculo.brand }}<small> {{ vehiculo.model }}</small></h6>
+            <p class="card-text"><small class="text-muted">{{ vehiculo.type }}</small></p>
+            <p class="card-text"><small class="text-muted">{{ vehiculo.transmission }}</small></p>
+            <div class="card-footer">
+              <button
+                  type="button"
+                  (click)="seleccionar(vehiculo.id,vehiculo.model,vehiculo.brand)"
+                  class="btn btn-outline-primary" >Seleccionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

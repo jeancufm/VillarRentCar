@@ -1,0 +1,113 @@
+<form name="form" [formGroup]="formulario" (ngSubmit)="register()" #r="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('firstName').errors?.required && !formulario.get('firstName').untouched }">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control form-control-sm" formControlName="firstName" required />
+          <div *ngIf="formulario.get('firstName').errors?.required && !formulario.get('firstName').untouched"  class="help-block">First Name is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('lastName').errors?.required && !formulario.get('lastName').untouched }">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control form-control-sm" formControlName="lastName" required />
+          <div *ngIf="formulario.get('lastName').errors?.required && !formulario.get('lastName').untouched"  class="help-block">Last Name is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('birthdate').errors?.required && !formulario.get('birthdate').untouched }">
+          <label for="birthdate">birthdate</label>
+          <input type="date" class="form-control form-control-sm" formControlName="birthdate" required />
+          <div *ngIf="formulario.get('birthdate').errors?.required && !formulario.get('birthdate').untouched"  class="help-block">birthdate is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('city').errors?.required && !formulario.get('city').untouched }">
+          <label for="city">city</label>
+          <input type="text" class="form-control form-control-sm" formControlName="city" required />
+          <div *ngIf="formulario.get('city').errors?.required && !formulario.get('city').untouched"  class="help-block">city is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('state').errors?.required && !formulario.get('state').untouched }">
+          <label for="state">state</label>
+          <input type="text" class="form-control form-control-sm" formControlName="state" required />
+          <div *ngIf="formulario.get('state').errors?.required && !formulario.get('state').untouched"  class="help-block">state is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('country').errors?.required && !formulario.get('country').untouched }">
+          <label for="country">country</label>
+          <input type="text" class="form-control form-control-sm" formControlName="country" required />
+          <div *ngIf="formulario.get('country').errors?.required && !formulario.get('country').untouched"  class="help-block">country is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('phone').errors?.required && !formulario.get('phone').untouched }">
+          <label for="phone">phone</label>
+          <input type="text" class="form-control form-control-sm" formControlName="phone" required />
+          <div *ngIf="formulario.get('phone').errors?.required && !formulario.get('phone').untouched"  class="help-block">phone is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('mail').errors && !formulario.get('mail').untouched }">
+          <label for="mail">Mail</label>
+          <input type="text" class="form-control form-control-sm" formControlName="mail" required />
+          <div *ngIf="formulario.get('mail').errors?.required && !formulario.get('mail').untouched"  class="help-block">mail is required</div>
+          <div *ngIf="formulario.get('mail').errors?.pattern && !formulario.get('mail').untouched"  class="help-block">format incorrect</div>
+          <div *ngIf="formulario.get('mail').errors?.existe && !formulario.get('mail').untouched"  class="help-block">mail exist</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('password').errors?.required && !formulario.get('password').untouched }">
+          <label for="password">Password</label>
+          <input type="password" class="form-control form-control-sm" formControlName="password" required />
+          <div *ngIf="formulario.get('password').errors?.required && !formulario.get('password').untouched"  class="help-block">Password is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('RepeatPassword').errors && !formulario.get('RepeatPassword').untouched }">
+          <label for="RepeatPassword">Repeat password</label>
+          <input type="password" class="form-control form-control-sm" formControlName="RepeatPassword" required />
+          <div *ngIf="formulario.get('RepeatPassword').errors?.required && !formulario.get('RepeatPassword').untouched" class="help-block">Password incorrect</div>
+          <div *ngIf="formulario.get('RepeatPassword').errors?.noiguales && !formulario.get('RepeatPassword').untouched" class="help-block">password does not match</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('direction').errors?.required && !formulario.get('direction').untouched }">
+          <label for="direction">Direction</label>
+          <input type="text" class="form-control form-control-sm" formControlName="direction" required />
+          <div *ngIf="formulario.get('direction').errors?.required && !formulario.get('direction').untouched"  class="help-block">Direccion is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+          <label for="codePromotor">Codigo de promotor</label>
+          <input type="text" class="form-control form-control-sm" name="codePromotor" formControlName="codePromotor" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <button type="submit"
+                  [disabled]="!formulario.valid"
+                  class="btn btn-primary">Register</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+    </div>
+  </div>
+</form>
+<alert></alert>

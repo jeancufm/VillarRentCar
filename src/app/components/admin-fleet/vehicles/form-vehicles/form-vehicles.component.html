@@ -1,0 +1,161 @@
+<h5>{{ title }}</h5>
+<form name="form" [formGroup]="formulario" (ngSubmit)="submit()" #r="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="id">Id</label>
+          <input type="text" disabled="true" class="form-control form-control-sm" formControlName="id" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('fleetId').errors?.required && !formulario.get('fleetId').untouched }">
+          <label for="fleetId">fleetId</label>
+          <select class="custom-select form-control"
+                  formControlName="fleetId">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="typeFleet.id" *ngFor="let typeFleet of typeFleets">{{ typeFleet.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('fleetId').errors?.required && !formulario.get('fleetId').untouched"  class="help-block">fleetId is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('brand').errors?.required && !formulario.get('brand').untouched }">
+          <label for="brand">brand</label>
+          <input type="text" class="form-control form-control-sm" formControlName="brand" />
+          <div *ngIf="formulario.get('brand').errors?.required && !formulario.get('brand').untouched"  class="help-block">brand is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('model').errors?.required && !formulario.get('model').untouched }">
+          <label for="model">model</label>
+          <input type="text" class="form-control form-control-sm" formControlName="model" />
+          <div *ngIf="formulario.get('model').errors?.required && !formulario.get('model').untouched"  class="help-block">model is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('priceDiary').errors?.required && !formulario.get('priceDiary').untouched }">
+          <label for="priceDiary">priceDiary</label>
+          <input type="number" class="form-control form-control-sm" formControlName="priceDiary" />
+          <div *ngIf="formulario.get('priceDiary').errors?.required && !formulario.get('priceDiary').untouched"  class="help-block">priceDiary is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('protectionPrice').errors?.required && !formulario.get('protectionPrice').untouched }">
+          <label for="protectionPrice">protectionPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="protectionPrice" />
+          <div *ngIf="formulario.get('protectionPrice').errors?.required && !formulario.get('protectionPrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('transmission').errors?.required && !formulario.get('transmission').untouched }">
+          <label for="transmission">transmission</label>
+          <input type="text" class="form-control form-control-sm" formControlName="transmission" />
+          <div *ngIf="formulario.get('transmission').errors?.required && !formulario.get('transmission').untouched"  class="help-block">transmission is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('year').errors?.required && !formulario.get('year').untouched }">
+          <label for="year">year</label>
+          <input type="number" class="form-control form-control-sm" formControlName="year" />
+          <div *ngIf="formulario.get('year').errors?.required && !formulario.get('year').untouched"  class="help-block">year is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('type').errors?.required && !formulario.get('type').untouched }">
+          <label for="type">type</label>
+          <input type="text" class="form-control form-control-sm" formControlName="type" />
+          <div *ngIf="formulario.get('type').errors?.required && !formulario.get('type').untouched"  class="help-block">type is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('passengers').errors?.required && !formulario.get('passengers').untouched }">
+          <label for="passengers">passengers</label>
+          <input type="text" class="form-control form-control-sm" formControlName="passengers" />
+          <div *ngIf="formulario.get('passengers').errors?.required && !formulario.get('passengers').untouched"  class="help-block">passengers is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('rubbers').errors?.required && !formulario.get('rubbers').untouched }">
+          <label for="name">rubbers</label>
+          <input type="text" class="form-control form-control-sm" formControlName="rubbers" />
+          <div *ngIf="formulario.get('rubbers').errors?.required && !formulario.get('rubbers').untouched"  class="help-block">rubbers is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('passengers').errors?.required && !formulario.get('passengers').untouched }">
+          <label for="spareRubbers">spareRubbers</label>
+          <input type="text" class="form-control form-control-sm" formControlName="spareRubbers" />
+          <div *ngIf="formulario.get('spareRubbers').errors?.required && !formulario.get('spareRubbers').untouched"  class="help-block">spareRubbers is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('deductible').errors?.required && !formulario.get('deductible').untouched }">
+          <label for="deductible">deductible</label>
+          <input type="text" class="form-control form-control-sm" formControlName="deductible" />
+          <div *ngIf="formulario.get('deductible').errors?.required && !formulario.get('deductible').untouched"  class="help-block">deductible is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" formControlName="isDelete">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">IsDelete</span>
+      </label>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Seleccione archivos</h5>
+      <div  NgDropFile
+            [ngClass]="{ 'file-over': estaSobreDropZone }"
+            (archivoSobre)="archivoSobreDropZone($event)"
+            [archivos]="archivos"
+            class="well drop-zone">
+        <h6>Suelta los archivos aquí</h6>
+        <img src="/assets/img/drop-images.png" alt="">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table class="table" *ngIf="archivos.length > 0">
+        <thead class="thead-inverse">
+          <th>Nombre</th>
+          <th>Tamaño</th>
+          <th>Tipo</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let archivo of archivos">
+            <td><strong>{{ archivo.nombreArchivo }}</strong></td>
+            <td>{{ archivo.archivo.size / 1024 / 1024 | number:'.2' }} MB.</td>
+            <td>{{ archivo.archivo.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <div class="row top-10">
+    <div class="col-md-6">
+      <div class="form-group">
+          <button type="submit"
+
+                  class="btn btn-primary">Register</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <button type="button" [routerLink]="['/adminFleet/vehicles']" class="btn btn-danger">Volver</button>
+      </div>
+    </div>
+  </div>
+</form>

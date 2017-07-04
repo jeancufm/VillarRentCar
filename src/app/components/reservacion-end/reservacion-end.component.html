@@ -1,0 +1,309 @@
+<div class="container-fluid main-container-reservacionEnd">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" *ngIf="image1">
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active" *ngIf="image1">
+                <img [src]="path+image1" class="img-thumbnail">
+              </div>
+              <div class="carousel-item" *ngIf="image2">
+                <img [src]="path+image2" class="img-thumbnail">
+              </div>
+              <div class="carousel-item" *ngIf="image3">
+                <img [src]="path+image3" class="img-thumbnail">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+              <thead class="table-inverse">
+                  <th colspan="2">Características del vehículo</th>
+              </thead>
+              <tbody *ngIf="VehicleInfo">
+                <tr>
+                  <td>Marca</td>
+                  <td><pre>{{ VehicleInfo.brand  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Modelo</td>
+                  <td><pre>{{ VehicleInfo.model  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Transmisión</td>
+                  <td><pre>{{ VehicleInfo.transmission  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Año</td>
+                  <td><pre>{{ VehicleInfo.year  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Tipo</td>
+                  <td><pre>{{ VehicleInfo.type  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Pasajeros</td>
+                  <td><pre>{{ VehicleInfo.passengers  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Cauchos</td>
+                  <td><pre>{{ VehicleInfo.rubbers  }}</pre></td>
+                </tr>
+                <tr>
+                  <td>Cauchos de respuesto</td>
+                  <td><pre>{{ VehicleInfo.spareRubbers  }}</pre></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table class="table" *ngIf="FleetInfo">
+        <thead class="thead-default">
+          <tr>
+            <th colspan="3">Cargos Básicos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>Tarifa Alquiler Diario</td>
+            <td>{{ VehicleInfo.priceDiary }} </td>
+            <input type="text" name="dayReservation"
+                   id="dayReservation"
+                   style="display:none;"
+                   value="{{_reservacionService.reservacion.ReturnDate | amDifference: _reservacionService.reservacion.InitDate :'days' : true}}">
+          </tr>
+          <tr>
+            <td><input type="radio" name="proteccion"
+                       [(ngModel)]="rentVehicleInfo.vehicleInfo.proteccion[0]"
+                       (change)="sumar()"
+                       value="S"></td>
+            <td>Proteccción con Deducible ({{ VehicleInfo.protectionPrice }})</td>
+            <td>{{ VehicleInfo.ProtectionPrice }}</td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="proteccion"
+                       [(ngModel)]="rentVehicleInfo.vehicleInfo.proteccion[0]"
+                       (change)="sumar()"
+                       value="C"></td>
+            <td>Proteccción sin Deducible ({{ VehicleInfo.protectionPrice }})</td>
+            <td>{{ VehicleInfo.ProtectionPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table" *ngIf="FleetInfo">
+          <thead class="thead-default">
+            <tr>
+              <th colspan="3">Cargos Opcionales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" name="conductorAdicional"
+                         [checked]="rentVehicleInfo.fleetInfo.conductorAdicional[0]"
+                         [(ngModel)]="rentVehicleInfo.fleetInfo.conductorAdicional[0]"
+                         (change)="sumar()"></td>
+              <td>Conductor Adicional ({{  FleetInfo.aditionalDrivePrice }})</td>
+              <td>{{ FleetInfo.aditionalDrivePrice }}</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" name="conductorMenorDeEdad"
+                  [checked]="rentVehicleInfo.fleetInfo.conductorMenorDeEdad[0]"
+                  [(ngModel)]="rentVehicleInfo.fleetInfo.conductorMenorDeEdad[0]"
+                  (change)="sumar()"></td>
+              <td>Conductor Menor de Edad (18 - 24 años) ({{ FleetInfo.minorDriverPrice }})</td>
+              <td>{{ FleetInfo.minorDriverPrice }}</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" name="proteccionContraRobosDeAccessorios"
+                [checked]="rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0]"
+                [(ngModel)]="rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0]"
+                (change)="sumar()"></td>
+              <td>Proteccción contra Robo de Accesorios ({{ FleetInfo.protectionAgainstTheftPrice }})</td>
+              <td>{{ FleetInfo.protectionAgainstTheftPrice }}</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" name="accidentesPersonales"
+                [checked]="rentVehicleInfo.fleetInfo.accidentesPersonales[0]"
+                [(ngModel)]="rentVehicleInfo.fleetInfo.accidentesPersonales[0]"
+                (change)="sumar()"></td>
+              <td>Seguro de Accidentes Personales ({{ FleetInfo.personalAccidentInsurancePrice }})</td>
+              <td>{{ FleetInfo.personalAccidentInsurancePrice }}</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" name="excesoRCV"
+                [checked]="rentVehicleInfo.fleetInfo.excesoRCV[0]"
+                [(ngModel)]="rentVehicleInfo.fleetInfo.excesoRCV[0]"
+                (change)="sumar()"></td>
+              <td>Exceso de limite R.C.V. ({{ FleetInfo.excessLimitRCVPrice }})</td>
+              <td>{{ FleetInfo.excessLimitRCVPrice }}</td>
+            </tr>
+          </tbody>
+        </table>
+      <table class="table" *ngIf="FleetInfo">
+          <thead class="thead-default">
+            <tr>
+              <th colspan="3">Cargos Obligatorios</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">Impuesto al Valor Agregado I.V.A. ({{ FleetInfo.iva }}%)</td>
+              <td>{{ (FleetInfo.iva/100) * Subtotal }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Subtotal</td>
+              <td>{{ Subtotal }}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+      <div class="col-md-12">
+        <form novalidate #forma="ngForm" (ngSubmit)="reservacionEnd(forma)">
+          <div class="border sidebar navReservacion fadeIn fast reservacionPanel">
+                <h3 class="text-sm-left">Reservación</h3>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group bd-search"
+                          *ngIf="_reservacionService.opciones && _reservacionService.opciones.length > 0">
+                        <h6>Lugar de inicio</h6>
+                        <select class="custom-select form-control form-control-sm"
+                                name="InitLocation"
+                                [(ngModel)]="_reservacionService.reservacion.InitLocation"
+                                required
+                                (change)=" setInitLocation($event.target.value)"
+                                #InitLocation="ngModel">
+                          <option  value="" selected>Seleccione...</option>
+                          <option [value]="opcion.city"
+                                  [selected]= "opcion.city == _reservacionService.reservacion.InitLocation"
+                                  *ngFor="let opcion of _reservacionService.opciones">{{ opcion.city }}</option>
+                        </select>
+                        <div  *ngIf="InitLocation.errors?.required  && !InitLocation.untouched" class="form-control-feedback">
+                         El lugar de inicio es requerido
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group bd-search">
+                      <h6>Fecha de inicio</h6>
+                      <input type="date"
+                            class="form-control form-control-sm h-25"
+                            name="InitDate"
+                            [(ngModel)]="_reservacionService.reservacion.InitDate"
+                            required
+                            #InitDate="ngModel"
+                            min="{{ today | amDateFormat: 'YYYY-MM-DD' }}">
+
+                            <div  *ngIf="InitDate.errors?.required && !InitDate.untouched" class="form-control-feedback">
+                             La fecha de inicio es requerida
+                            </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label for="returnDiferent">¿Devolverá el vehículo en otra ubicación?</label>
+                      <input type="checkbox" [(ngModel)]="_reservacionService.reservacion.returnDiferent" name="returnDiferent">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="_reservacionService.reservacion.returnDiferent">
+                  <div class="col-lg-12">
+                    <div class="form-group bd-search">
+                      <h6>Lugar de retorno</h6>
+                      <select class="custom-select form-control form-control-sm h-25"
+                              name="returnCityId"
+                              [(ngModel)]="_reservacionService.reservacion.returnCityId"
+                              required
+                              #ReturnLocation="ngModel">
+                        <option  value="0" selected>Lugar de retorno</option>
+                        <option [value]="city.id" *ngFor="let city of _reservacionService.opcionesReturn">{{ city.name }}</option>
+                      </select>
+
+                             <div  *ngIf="ReturnLocation.errors?.required && !ReturnLocation.untouched" class="form-control-feedback">
+                              El lugar de retorno es requerido
+                             </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <h6>Fecha de retorno</h6>
+                      <input type="date"
+                             class="form-control form-control-sm h-25"
+                             name="ReturnDate"
+                             [(ngModel)]="_reservacionService.reservacion.ReturnDate"
+                             required
+                             #ReturnDate="ngModel"
+                             min="{{ _reservacionService.reservacion.InitDate }}">
+                             <div  *ngIf="ReturnDate.errors?.required && !ReturnDate.untouched" class="form-control-feedback">
+                               La fecha de retorno es requerida
+                             </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                        <h6>Edad</h6>
+                        <select class="custom-select form-control form-control-sm h-25"
+                                name="age"
+                                [(ngModel)]="_reservacionService.reservacion.age"
+                                required
+                                #age="ngModel">
+                          <option  value="" selected>Edad</option>
+                          <option [value]="age" *ngFor="let age of ageSelect">{{ age }}</option>
+                        </select>
+                        <div  *ngIf="age.errors?.required && !age.untouched" class="form-control-feedback">
+                          Debe indicar su edad.
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <h6>Codigo de promoción</h6>
+                      <input type="text"
+                             class="form-control form-control-sm h-25"
+                             name="codePromotion"
+                             [(ngModel)]="_reservacionService.reservacion.codePromotion"
+                             #CodePromotor="ngModel">
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <div class="row">
+            <div class="col-lg-12">
+                <button
+                        [disabled]="!forma.valid"
+                        type="submit"
+                        class="btn btn-info top-10">Reservar</button>
+                <button (click)="cancelar()" class="btn btn-danger top-10">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+</div>

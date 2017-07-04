@@ -1,0 +1,37 @@
+
+<h4>Vehicles</h4>
+<hr>
+<button type="button" [routerLink]="['new']" name="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+<hr>
+<table id="vehiclesTable" class="table table-striped table-bordered top-10" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+              <th>brand</th>
+              <th>model</th>
+              <th>fleet</th>
+              <th>city</th>
+              <th>country</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+              <th>brand</th>
+              <th>model</th>
+              <th>fleet</th>
+              <th>city</th>
+              <th>country</th>
+              <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let vehicle of vehicles">
+            <td>{{ vehicle.brand }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.fleet }}</td>
+            <td>{{ vehicle.city }}</td>
+            <td>{{ vehicle.country }}</td>
+            <td><a  [routerLink]="['vehiclesEdit',vehicle.id]"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+          </tr>
+        </tbody>
+</table>

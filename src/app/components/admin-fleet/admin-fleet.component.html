@@ -1,0 +1,17 @@
+<div class="container main-container">
+  <div class="row top-10">
+    <div class="col-md-12 text-center">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" [routerLink]="['country']" routerLinkActive="active">Country</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['city']" routerLinkActive="active">City</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['typeFleet']" routerLinkActive="active">Tipos de flotas</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['vehicles']" routerLinkActive="active">Vehiculos</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

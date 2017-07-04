@@ -1,0 +1,17 @@
+{
+	"countrys": [{
+		"country": [{
+				"CountryName": "Venezuela",
+				"Citys": ["Caracas", "Maiquetia"]
+			},
+			{
+				"CountryName": "EEUU",
+				"Citys": ["Miami", "Florida", "Miami Aeropuerto"]
+			},
+			{
+				"CountryName": "Panama",
+				"Citys": ["Panama Viejo", "Panama Aeropuerto"]
+			}
+		]
+	}]
+}

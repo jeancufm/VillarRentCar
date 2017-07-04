@@ -1,0 +1,106 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" [routerLink]="['home']">
+     <img src="assets/img/logo/logo.gif" class="logo" alt="">
+   </a>
+  <div class="collapse navbar-collapse options-nav" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+
+    </ul>
+    <ul class="nav justify-content-end">
+      <li class="nav-item" routerLinkActive="activo">
+        <span class="navbar-text">
+          <a [routerLink]="['home']">
+            <span class="navbar-text"><i class="fa fa-home" aria-hidden="true"></i>
+              <span class="text hidden-sm-down">Inicio</span>
+            </span>
+          </a>
+        </span>
+      </li>
+      <li class="nav-item" routerLinkActive="activo">
+        <span class="navbar-text">
+          <a [routerLink]="['fleet']">
+            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
+              <span class="text hidden-sm-down">Flota de vehiculos</span>
+            </span>
+          </a>
+        </span>
+      </li>
+      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
+                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
+                                                             _authenticationService.getRole() == 'AdminFlota' )">
+        <span class="navbar-text">
+          <a [routerLink]="['adminFleet/country']">
+            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
+              <span class="text hidden-sm-down">Admin Flota</span>
+            </span>
+          </a>
+        </span>
+      </li>
+      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
+                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
+                                                             _authenticationService.getRole() == 'AdminClub' )">
+        <span class="navbar-text">
+          <a [routerLink]="['adminClub']">
+            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
+              <span class="text hidden-sm-down">Admin Club</span>
+            </span>
+          </a>
+        </span>
+      </li>
+      <li class="nav-item">
+        <span class="navbar-text">
+          <div class="dropdown" *ngIf="language == 'es'">
+            <button class="dropdown-toggle languaje" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img [src]="language | bandera" class="img-fluid pull-xs-left text" alt="...">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button" (click)="language = 'en'"> <img [src]="'en' | bandera" class="img-fluid pull-xs-left text" alt="..."></button>
+            </div>
+          </div>
+          <div class="dropdown" *ngIf="language == 'en'">
+            <button class="dropdown-toggle languaje" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img [src]="language | bandera" class="img-fluid pull-xs-left text" alt="...">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button" (click)="language = 'es'"> <img [src]="'es' | bandera" class="img-fluid pull-xs-left text" alt="..."></button>
+            </div>
+          </div>
+        </span>
+      </li>
+      <li class="nav-item">
+        <span class="navbar-text">
+          <a *ngIf="!_authenticationService.authenticated()" data-toggle="modal"
+                  data-target="#LoginModal">
+            <i class="fa fa-1x fa-sign-in"></i> <span class="text hidden-sm-down">Iniciar Sesión</span>
+          </a>
+          <a (click)="logout()" *ngIf="_authenticationService.authenticated()">
+            <i class="fa fa-1x fa-sign-out"></i><span class="text hidden-sm-down"> Cerrar sesión</span>
+          </a>
+        </span>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="TitleLogin"><span></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12" id="login">
+              <app-login></app-login>
+        </div>
+        <div class="col-md-12" id="register" style="display:none">
+              <app-register></app-register>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

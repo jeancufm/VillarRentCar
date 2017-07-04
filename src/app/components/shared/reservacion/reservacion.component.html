@@ -1,0 +1,128 @@
+<nav class="border sidebar navReservacion fadeIn fast reservacion">
+
+  <h5 class="formReservacion display-6">Reservación</h5>
+  <form [formGroup]="formulario" (ngSubmit)="reservacionSearch()" >
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group bd-search" [ngClass]="{ 'has-danger': formulario.get('countryId').errors?.required && !formulario.get('countryId').untouched }">
+        <label for="countryId" class="h-25">País</label>
+        <select class="custom-select form-control form-control-sm"
+                (change)="getCity($event.target.value)"
+                formControlName="countryId">
+          <option  value="" selected>Seleccione...</option>
+          <option [value]="item.id" *ngFor="let item of country">{{ item.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group bd-search" [ngClass]="{ 'has-danger': formulario.get('countryId').errors?.required && !formulario.get('countryId').untouched }">
+        <label for="city" class="h-25">Ciudad</label>
+        <select class="custom-select form-control form-control-sm"
+                (change)="getTypeFleet($event.target.value)"
+                formControlName="cityId">
+          <option  value="" selected>Seleccione...</option>
+          <option [value]="city.id" *ngFor="let city of citys">{{ city.name }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+     <div class="col-lg-6">
+        <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('InitDate').errors?.required && !formulario.get('InitDate').untouched}">
+          <label for="PickUpDate">Fecha de inicio</label>
+          <input type="date"
+                class="form-control form-control-sm h-25"
+                formControlName="InitDate"
+                min="{{ today | amDateFormat: 'YYYY-MM-DD' }}">
+
+                <div  *ngIf="formulario.get('InitDate').errors?.required && !formulario.get('InitDate').untouched" class="form-control-feedback">
+                 La fecha de inicio es requerida
+                </div>
+
+        </div>
+      </div>
+        <div class="col-lg-6">
+          <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('ReturnDate').errors?.required && !formulario.get('ReturnDate').untouched}">
+            <label for="ReturnDate">Fecha de retorno</label>
+            <input type="date"
+                   class="form-control form-control-sm h-25"
+                   formControlName="ReturnDate"
+                   min="{{ formulario.get('InitDate').value }}">
+                   <div  *ngIf="formulario.get('ReturnDate').errors?.required && !formulario.get('ReturnDate').untouched" class="form-control-feedback">
+                     La fecha de retorno es requerida
+                   </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="returnDiferent">¿Devolverá el vehículo en otra ubicación?</label>
+        <input type="checkbox" formControlName="returnDiferent">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6" *ngIf="formulario.get('returnCityId').value && _reservacionService.opcionesReturn.length > 0">
+      <div class="form-group bd-search" [ngClass]="{ 'has-danger': formulario.get('returnCityId').errors?.returnLocationValid && !formulario.get('returnCityId').untouched }">
+        <label for="returnCityId">Lugar de retorno</label>
+        <select class="custom-select form-control form-control-sm h-25"
+                   formControlName="returnCityId">
+          <option  value="" selected>Lugar de retorno</option>
+          <option [value]="city.city" *ngFor="let city of _reservacionService.opcionesReturn">{{ city.city }}</option>
+        </select>
+
+               <div  *ngIf="formulario.get('returnDiferent').errors?.returnLocationValid && !formulario.get('ReturnLocation').untouched " class="form-control-feedback">
+                El lugar de retorno es requerido
+               </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('age').errors?.required && !formulario.get('age').untouched}">
+          <label for="age">Edad</label>
+          <select class="custom-select form-control form-control-sm h-25"
+                  formControlName="age">
+            <option  value="" selected>Edad</option>
+            <option [value]="age" *ngFor="let age of ageSelect">{{ age }}</option>
+          </select>
+          <div  *ngIf="formulario.get('age').errors?.required && !formulario.get('age').untouched" class="form-control-feedback">
+            Debe indicar su edad.
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('Fleet').errors?.required && !formulario.get('Fleet').untouched}">
+        <label for="Fleet">Tipo de vehiculo</label>
+        <select class="custom-select form-control form-control-sm"
+                formControlName="Fleet">
+          <option  value="" selected>Flota</option>
+          <option [value]="fleet.id" *ngFor="let fleet of typeFleet">{{ fleet.name }}</option>
+        </select>
+        <div  *ngIf="formulario.get('Fleet').errors?.required && !formulario.get('Fleet').untouched" class="form-control-feedback">
+          Debe seleccionar un tipo de vehiculo
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <h6>Codigo de promoción</h6>
+        <input type="text"
+               class="form-control form-control-sm h-25"
+               formControlName="codePromotion">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button
+          [disabled]="!formulario.valid"
+          type="submit"
+          class="btn btn-success form-control-sm">
+          Reservar
+    </button>
+  </div>
+</form>
+</nav>

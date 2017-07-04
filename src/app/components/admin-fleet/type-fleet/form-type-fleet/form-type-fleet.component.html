@@ -1,0 +1,97 @@
+<h5>{{ title }}</h5>
+<form name="form" [formGroup]="formulario" (ngSubmit)="submit()" #r="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="id">Id</label>
+          <input type="text" disabled="true" class="form-control form-control-sm" formControlName="id" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('name').errors?.required && !formulario.get('cityId').untouched }">
+          <label for="name">cityId</label>
+          <select class="custom-select form-control"
+                  formControlName="cityId">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="city.id" *ngFor="let city of citys">{{ city.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('cityId').errors?.required && !formulario.get('cityId').untouched"  class="help-block">cityId is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('name').errors?.required && !formulario.get('name').untouched }">
+          <label for="name">Name</label>
+          <input type="text" class="form-control form-control-sm" formControlName="name" />
+          <div *ngIf="formulario.get('name').errors?.required && !formulario.get('name').untouched"  class="help-block">Name is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('aditionalDrivePrice').errors?.required && !formulario.get('aditionalDrivePrice').untouched }">
+          <label for="name">aditionalDrivePrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="aditionalDrivePrice" />
+          <div *ngIf="formulario.get('aditionalDrivePrice').errors?.required && !formulario.get('aditionalDrivePrice').untouched"  class="help-block">aditionalDrivePrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('minorDriverPrice').errors?.required && !formulario.get('minorDriverPrice').untouched }">
+          <label for="name">minorDriverPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="minorDriverPrice" />
+          <div *ngIf="formulario.get('minorDriverPrice').errors?.required && !formulario.get('minorDriverPrice').untouched"  class="help-block">minorDriverPrice is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('protectionAgainstTheftPrice').errors?.required && !formulario.get('protectionAgainstTheftPrice').untouched }">
+          <label for="name">protectionAgainstTheftPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="protectionAgainstTheftPrice" />
+          <div *ngIf="formulario.get('protectionAgainstTheftPrice').errors?.required && !formulario.get('protectionAgainstTheftPrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('personalAccidentInsurancePrice').errors?.required && !formulario.get('personalAccidentInsurancePrice').untouched }">
+          <label for="name">personalAccidentInsurancePrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="personalAccidentInsurancePrice" />
+          <div *ngIf="formulario.get('personalAccidentInsurancePrice').errors?.required && !formulario.get('personalAccidentInsurancePrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('excessLimitRCVPrice').errors?.required && !formulario.get('excessLimitRCVPrice').untouched }">
+          <label for="name">excessLimitRCVPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="excessLimitRCVPrice" />
+          <div *ngIf="formulario.get('excessLimitRCVPrice').errors?.required && !formulario.get('excessLimitRCVPrice').untouched"  class="help-block">excessLimitRCVPrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('iva').errors?.required && !formulario.get('iva').untouched }">
+          <label for="name">iva</label>
+          <input type="number" class="form-control form-control-sm" formControlName="iva" />
+          <div *ngIf="formulario.get('iva').errors?.required && !formulario.get('iva').untouched"  class="help-block">iva is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" formControlName="isDelete">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">IsDelete</span>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <button type="submit"
+                  [disabled]="!formulario.valid"
+                  class="btn btn-primary">Register</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <button type="button" [routerLink]="['/adminFleet/typeFleet']" class="btn btn-danger">Volver</button>
+      </div>
+    </div>
+  </div>
+</form>

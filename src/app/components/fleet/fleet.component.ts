@@ -20,6 +20,7 @@ export class FleetComponent {
   reservacion:any;
   country:number;
   countryFleet:string;
+  typeFleet:number;
   constructor( private activatedRoute:ActivatedRoute,
                 private fleetService:FleetService,
                 private _UserInfoService:UserInfoService,
@@ -32,8 +33,26 @@ export class FleetComponent {
                           if(country.name === this._UserInfoService.countryLocated)
                           {
                             this.country = country.id;
-                            this.userLocalated = country.id;
-                            this.onChange(this.userLocalated);
+                            this._reservacionService.reservacion.CountryId = country.id;
+                            this._config.getCity(country.id)
+                              .subscribe( data => {
+                                this.citys=data;
+                                this.city = data[0].id
+                                this._reservacionService.reservacion.CityId = data[0].id;
+                                this._config.getTypeFleet(data[0].id)
+                                  .subscribe( data => {
+                                    this.fleet=data;
+                                    this.typeFleet = data[0].id;
+                                    this._config.getVehicles(data[0].id)
+                                      .subscribe( data => {
+                                        if(data.length != undefined){
+                                          this._reservacionService.reservacion.fleetId = data[0].id;
+                                          this.vehicles=data;
+                                        }
+
+                                     });
+                                 });
+                             });
                           }
                       }
                   });

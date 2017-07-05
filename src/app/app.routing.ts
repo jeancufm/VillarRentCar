@@ -8,7 +8,6 @@ import { FleetComponent } from './components/fleet/fleet.component';
 import { ReservacionEndComponent } from './components/reservacion-end/reservacion-end.component';
 import { AdminFleetComponent } from './components/admin-fleet/admin-fleet.component';
 import { FleetReservacionComponent } from './components/fleet-reservacion/fleet-reservacion.component';
-import { RESERVACION_ROUTES } from './components/fleet-reservacion/fleet-reservacion.route';
 import { FLEETS_ROUTES } from './components/admin-fleet/admin-fleet.route';
 
 const appRoutes: Routes = [
@@ -18,8 +17,7 @@ const appRoutes: Routes = [
     { path: 'fleet', component: FleetComponent  },
     {
       path: 'reservacionIni',
-      component: FleetReservacionComponent,
-      children: RESERVACION_ROUTES
+      component: FleetReservacionComponent
     },
     {
       path: 'adminFleet',

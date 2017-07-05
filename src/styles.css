@@ -118,7 +118,6 @@ a {
   color:white;
 }
 .footer {
-
   bottom: 0;
   width: 100%;
   height: 60px;
@@ -134,14 +133,6 @@ a {
     padding: .75rem 1.25rem;
     background-color: white;
     border-top: 0px;
-}
-@media (min-width: 576px)
-{
-  .card-columns {
-    -webkit-column-count: 5;
-    -moz-column-count: 5;
-    column-count: 5;
-  }
 }
 .activo{
   font-weight: bold;

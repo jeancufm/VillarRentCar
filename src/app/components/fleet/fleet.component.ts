@@ -21,6 +21,7 @@ export class FleetComponent {
   country:number;
   countryFleet:string;
   typeFleet:number;
+  path:string ="http://localhost:90/VillaCarApi/uploads/";
   constructor( private activatedRoute:ActivatedRoute,
                 private fleetService:FleetService,
                 private _UserInfoService:UserInfoService,
@@ -59,6 +60,7 @@ export class FleetComponent {
                 }
     onChange(newValue) {
       this._reservacionService.reservacion.CountryId = newValue;
+      this.country = newValue;
       this._config.getCity(newValue)
         .subscribe( data => {
           this.citys=data;
@@ -66,6 +68,7 @@ export class FleetComponent {
     }
     onChangeCity(newValue) {
       this._reservacionService.reservacion.CityId = newValue;
+      this.city = newValue;
       this._config.getTypeFleet(newValue)
         .subscribe( data => {
           this.fleet=data;

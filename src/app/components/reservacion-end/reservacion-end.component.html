@@ -133,24 +133,24 @@
                 [checked]="rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0]"
                 [(ngModel)]="rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0]"
                 (change)="sumar()"></td>
-              <td>Proteccción contra Robo de Accesorios ({{ FleetInfo.protectionAgainstTheftPrice }})</td>
-              <td>{{ FleetInfo.protectionAgainstTheftPrice }}</td>
+              <td>Proteccción contra Robo de Accesorios ({{ VehicleInfo.protectionAgainstTheftPrice }})</td>
+              <td>{{ VehicleInfo.protectionAgainstTheftPrice }}</td>
             </tr>
             <tr>
               <td><input type="checkbox" name="accidentesPersonales"
                 [checked]="rentVehicleInfo.fleetInfo.accidentesPersonales[0]"
                 [(ngModel)]="rentVehicleInfo.fleetInfo.accidentesPersonales[0]"
                 (change)="sumar()"></td>
-              <td>Seguro de Accidentes Personales ({{ FleetInfo.personalAccidentInsurancePrice }})</td>
-              <td>{{ FleetInfo.personalAccidentInsurancePrice }}</td>
+              <td>Seguro de Accidentes Personales ({{ VehicleInfo.personalAccidentInsurancePrice }})</td>
+              <td>{{ VehicleInfo.personalAccidentInsurancePrice }}</td>
             </tr>
             <tr>
               <td><input type="checkbox" name="excesoRCV"
                 [checked]="rentVehicleInfo.fleetInfo.excesoRCV[0]"
                 [(ngModel)]="rentVehicleInfo.fleetInfo.excesoRCV[0]"
                 (change)="sumar()"></td>
-              <td>Exceso de limite R.C.V. ({{ FleetInfo.excessLimitRCVPrice }})</td>
-              <td>{{ FleetInfo.excessLimitRCVPrice }}</td>
+              <td>Exceso de limite R.C.V. ({{ VehicleInfo.excessLimitRCVPrice }})</td>
+              <td>{{ VehicleInfo.excessLimitRCVPrice }}</td>
             </tr>
           </tbody>
         </table>

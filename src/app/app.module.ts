@@ -24,7 +24,6 @@ import { ReservacionComponent } from './components/shared/reservacion/reservacio
 import { RegisterComponent } from './components/register/index';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { FleetReservacionComponent } from './components/fleet-reservacion/fleet-reservacion.component';
-import { FleetReservacionDetailsComponent } from './components/fleet-reservacion/fleet-reservacion-details/fleet-reservacion-details.component';
 import { ReservacionEndComponent } from './components/reservacion-end/reservacion-end.component';
 import { AdminFleetComponent } from './components/admin-fleet/admin-fleet.component';
 import { TypeFleetComponent } from './components/admin-fleet/type-fleet/type-fleet.component';
@@ -58,7 +57,6 @@ import { NgDropFileDirective } from './directives/ng-drop-file.directive';
         FleetComponent,
         ReservacionComponent,
         FleetReservacionComponent,
-        FleetReservacionDetailsComponent,
         ReservacionEndComponent,
         AdminFleetComponent,
         TypeFleetComponent,

@@ -6,7 +6,7 @@ import { IReservacion } from '../clases/reservacion.class';
 @Injectable()
 export class ReservacionService {
 
-  urlBusqueda:string = "../assets/json/country.json"
+  urlBusqueda:string = "http://localhost:90/VillaCarApi/";
   reservacion:IReservacion = {
     CountryId:0,
     CityId:0,
@@ -24,86 +24,16 @@ export class ReservacionService {
   opcionesReturn:any;
   opcionesFleet:any;
   constructor(private http:Http) { }
-  searchCountry(searchOptions:string){
-    let opcionesCity:any[] = [];
-    return this.http.get(this.urlBusqueda).map(resp=>{
-      for (let country of resp.json().countrys) {
-        for (let citys of country.country) {
-            for (let city of citys.Citys) {
-              if(city.toLowerCase().indexOf(searchOptions.toLowerCase()) >= 0 )
-              {
-                let opcion = {
-                  country:citys.CountryName,
-                  city:city
-                };
-                opcionesCity.push(opcion);
-              }
-            }
+  SolicitudReservacion(reservacion:any){
+    let query = "ReservacionRegisterUpdate.php";
+    let url = this.urlBusqueda + query;
+    return this.http.post(url,reservacion)
+      .map( resp=>{
+        if (resp.json().Fallo != undefined)
+        {
+          return null;
         }
-      }
-      return opcionesCity;
-    });
-  }
-  searchCityForCountry(searchOptions:string,countrySearch:string){
-    let opcionesCity:any[] = [];
-    return this.http.get(this.urlBusqueda).map(resp=>{
-      for (let country of resp.json().countrys) {
-        for (let citys of country.country) {
-          if(citys.CountryName == countrySearch){
-            for (let city of citys.Citys) {
-              if(city.toLowerCase().indexOf(searchOptions.toLowerCase()) >= 0 )
-              {
-                let opcion = {
-                  country:citys.CountryName,
-                  city:city
-                };
-                opcionesCity.push(opcion);
-              }
-            }
-          }
-        }
-      }
-      return opcionesCity;
-    });
-  }
-  searchCityForCountryOnly(countrySearch:number){
-    let opcionesCity:any[] = [];
-    return this.http.get(this.urlBusqueda).map(resp=>{
-      for (let country of resp.json().countrys) {
-        for (let citys of country.country) {
-          if(citys.CountryName == countrySearch){
-            for (let city of citys.Citys) {
-                let opcion = {
-                  country:citys.CountryName,
-                  city:city
-                };
-                opcionesCity.push(opcion);
-            }
-          }
-        }
-      }
-      return opcionesCity;
-    });
-  }
-  getCityForCountry(countrySearch:number){
-    let opcionesCity:any[] = [];
-    return this.http.get(this.urlBusqueda).map(resp=>{
-      for (let country of resp.json().countrys) {
-        for (let citys of country.country) {
-          if(citys.CountryName == countrySearch)
-          {
-
-            for (let city of citys.Citys) {
-                let opcion = {
-                  country:citys.CountryName,
-                  city:city
-                }
-                opcionesCity.push(opcion);
-              }
-            }
-          }
-        }
-      return opcionesCity;
-    });
+        return resp.json();
+      });
   }
 }

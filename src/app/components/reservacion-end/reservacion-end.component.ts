@@ -52,13 +52,11 @@ export class ReservacionEndComponent implements OnInit {
       }
       this._fleetService.getVehicleInfo(this._reservacionService.reservacion.idVehicle).subscribe(data =>{
                                           this.VehicleInfo = data[0];
-                                          console.log(this.VehicleInfo);
                                           this.path="http://localhost:90/VillaCarApi/uploads/"+this.VehicleInfo.idCountry+"/"+this.VehicleInfo.idCity+"/"
                                                     +this.VehicleInfo.idFleet+"/"+this.VehicleInfo.idVehicle+"/";
                                           this.image1 = this.VehicleInfo.image1;
                                           this.image2 = this.VehicleInfo.image2;
                                           this.image3 = this.VehicleInfo.image3;
-                                          console.log(this.image1);
                                           this._ConfigService.getTypeFleet(this._reservacionService.reservacion.fleetId)
                                               .subscribe(data =>{
                                                           if(data.length>0)
@@ -68,11 +66,6 @@ export class ReservacionEndComponent implements OnInit {
                                                           }
                                                         })
                                         });
-
-      this._reservacionService.searchCityForCountryOnly(this._reservacionService.reservacion.CountryId)
-      .subscribe(data => {
-        this._reservacionService.opciones = data
-      });
       this.setInitLocation(this._reservacionService.reservacion.CountryId);
     }
   }
@@ -85,20 +78,17 @@ export class ReservacionEndComponent implements OnInit {
     });
   }
   reservacionEnd(forma:any){
-    console.log(forma);
     if(!this.auth.authenticated())
     {
-      console.log("aqui");
       $('#LoginModal').modal('show');
       return;
     }
-    if(this._reservacionService.reservacion.CityId && this._reservacionService.reservacion.returnDiferent)
-    {
-      this._reservacionService.reservacion.returnCityId = this._reservacionService.reservacion.CityId;
-    }
-    console.log("enviar correo");
-    console.log(this._reservacionService.reservacion);
-    this._reservacionService.reservacion = {
+
+    this._reservacionService.reservacion.returnCityId = this._reservacionService.reservacion.returnDiferent?this._reservacionService.reservacion.returnCityId:this._reservacionService.reservacion.CityId;
+
+    let reservacion = this.asignarDatos(forma.value);
+    this._reservacionService.SolicitudReservacion(reservacion);
+    /*this._reservacionService.reservacion = {
       CountryId:0,
       CityId:0,
       fleetId:0,
@@ -110,8 +100,8 @@ export class ReservacionEndComponent implements OnInit {
       mail:"",
       codePromotion:"",
       idVehicle:0
-    };
-    this._router.navigate(['home']);
+    };*/
+    //this._router.navigate(['home']);
   }
   cancelar(){
     this._reservacionService.reservacion = {
@@ -135,31 +125,38 @@ export class ReservacionEndComponent implements OnInit {
     subTotal = subTotal + (this.rentVehicleInfo.vehicleInfo.proteccion == "C"?(+this.VehicleInfo.protectionPrice):0);
     subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.conductorAdicional[0] == true?(+this.FleetInfo.aditionalDrivePrice):0);
     subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.conductorMenorDeEdad[0] == true?(+this.FleetInfo.minorDriverPrice):0);
-    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0] == true?(+this.FleetInfo.protectionAgainstTheftPrice):0);
-    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.accidentesPersonales[0] == true?(+this.FleetInfo.personalAccidentInsurancePrice):0);
-    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.excesoRCV[0] == true?(+this.FleetInfo.excessLimitRCVPrice):0);
+    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0] == true?(+this.VehicleInfo.protectionAgainstTheftPrice):0);
+    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.accidentesPersonales[0] == true?(+this.VehicleInfo.personalAccidentInsurancePrice):0);
+    subTotal = subTotal + (this.rentVehicleInfo.fleetInfo.excesoRCV[0] == true?(+this.VehicleInfo.excessLimitRCVPrice):0);
     this.Subtotal = subTotal;
   }
-  asignarDatos(){
-    let priceDiary = this.VehicleInfo.priceDiary;
-    let protectionPrice = + (this.rentVehicleInfo.vehicleInfo.proteccion == "C"?(+this.VehicleInfo.protectionPrice):0);
-    let aditionalDrivePrice = + (this.rentVehicleInfo.fleetInfo.conductorAdicional[0] == true?(+this.FleetInfo.aditionalDrivePrice):0);
-    let minorDriverPrice = + (this.rentVehicleInfo.fleetInfo.conductorMenorDeEdad[0] == true?(+this.FleetInfo.minorDriverPrice):0);
-    let protectionAgainstTheftPrice = + (this.rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0] == true?(+this.FleetInfo.protectionAgainstTheftPrice):0);
-    let personalAccidentInsurancePrice = + (this.rentVehicleInfo.fleetInfo.accidentesPersonales[0] == true?(+this.FleetInfo.personalAccidentInsurancePrice):0);
-    let excessLimitRCVPrice = + (this.rentVehicleInfo.fleetInfo.excesoRCV[0] == true?(+this.FleetInfo.excessLimitRCVPrice):0);
-    let Descount = 0;
-    let VehicleId = this._reservacionService.reservacion.idVehicle;
+  asignarDatos(formulario:any){
+    let idUser = this.auth.getProfile().id;
+    let reservacion:any = {
+      id:0,
+      priceDiary: + (this.VehicleInfo.priceDiary),
+      protectionPrice: + (this.rentVehicleInfo.vehicleInfo.proteccion == "C"?(+this.VehicleInfo.protectionPrice):0),
+      aditionalDrivePrice: + (this.rentVehicleInfo.fleetInfo.conductorAdicional[0] == true?(+this.FleetInfo.aditionalDrivePrice):0),
+      minorDriverPrice: + (this.rentVehicleInfo.fleetInfo.conductorMenorDeEdad[0] == true?(+this.FleetInfo.minorDriverPrice):0),
+      protectionAgainstTheftPrice: + (this.rentVehicleInfo.fleetInfo.proteccionContraRobosDeAccessorios[0] == true?(+this.VehicleInfo.protectionAgainstTheftPrice):0),
+      personalAccidentInsurancePrice: + (this.rentVehicleInfo.fleetInfo.accidentesPersonales[0] == true?(+this.VehicleInfo.personalAccidentInsurancePrice):0),
+      excessLimitRCVPrice: + (this.rentVehicleInfo.fleetInfo.excesoRCV[0] == true?(+this.VehicleInfo.excessLimitRCVPrice):0),
+      Descount: 0,
+      VehicleId: this.VehicleInfo.id,
+      CountDays:0,
+      SubTotal: this.Subtotal,
+      IVA: (this.FleetInfo.iva/100) * this.Subtotal,
+      Total:((this.FleetInfo.iva/100) * this.Subtotal)+ this.Subtotal,
+      CodeDescount:0,
+      userId: idUser,
+      returnCityId:    this._reservacionService.reservacion.returnDiferent?this._reservacionService.reservacion.returnCityId:this._reservacionService.reservacion.CityId,
+      initDate:formulario.InitDate,
+      returnDate:formulario.ReturnDate,
+      StatusId:3,
+      isDelete:0
+    }
+    return reservacion;
 
-    let CountDays;
-    let SubTotal;
-    let IVA;
-    let Total;
-    let CodeDescount;
-    let userId;
-    let returnCityId;
-    let initDate;
-    let returnDate;
   }
 
 }

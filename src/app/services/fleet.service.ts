@@ -82,7 +82,6 @@ export class FleetService {
     .map(
       resp=>{
         let datos =resp.json();
-          console.log(datos);
           return datos;
         });
   }

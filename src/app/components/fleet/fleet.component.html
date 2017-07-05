@@ -1,59 +1,66 @@
 
   <div class="container main-container">
     <div>
-    <div class="row">
-      <div class="col-md-4">
-          <h6 class="text-success">País</h6>
-          <select class="btn btn-secondary dropdown-toggle"
-            [(ngModel)]="country"
-            name="country"
-            (change)="onChange($event.target.value)" id="country">
-            <option value="" selected>Seleccione...</option>
-            <option  [value]="country.id"  *ngFor="let country of countrys">{{ country.name }}</option>
-          </select>
-      </div>
-      <div class="col-md-4">
-          <h6 class="text-success">Ciudad</h6>
-          <select class="btn btn-secondary dropdown-toggle"
-            [(ngModel)]="city"
-            name="city"
-            (change)="onChangeCity($event.target.value)" id="city">
-            <option value="" selected>Seleccione...</option>
-            <option  [value]="city.id" *ngFor="let city of citys">{{ city.name }}</option>
-          </select>
-      </div>
-      <div class="col-md-4">
-        <h6 class="text-primary">Flotas de vehiculos</h6>
+      <div class="row">
+        <div class="col-md-4">
+            <h6 class="text-success">País</h6>
             <select class="btn btn-secondary dropdown-toggle"
-                    name="typeFleet"
-                    [(ngModel)]="typeFleet"
-                    (change)="onChangeFleet($event.target.value)">
+              [(ngModel)]="country"
+              name="country"
+              (change)="onChange($event.target.value)" id="country">
               <option value="" selected>Seleccione...</option>
-            <option  [value]="item.id" *ngFor="let item of fleet">{{ item.name }}</option>
-          </select>
+              <option  [value]="country.id"  *ngFor="let country of countrys">{{ country.name }}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <h6 class="text-success">Ciudad</h6>
+            <select class="btn btn-secondary dropdown-toggle"
+              [(ngModel)]="city"
+              name="city"
+              (change)="onChangeCity($event.target.value)" id="city">
+              <option value="" selected>Seleccione...</option>
+              <option  [value]="city.id" *ngFor="let city of citys">{{ city.name }}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-primary">Flotas de vehiculos</h6>
+              <select class="btn btn-secondary dropdown-toggle"
+                      name="typeFleet"
+                      [(ngModel)]="typeFleet"
+                      (change)="onChangeFleet($event.target.value)">
+                <option value="" selected>Seleccione...</option>
+              <option  [value]="item.id" *ngFor="let item of fleet">{{ item.name }}</option>
+            </select>
+        </div>
       </div>
-    </div>
-    <router-outlet></router-outlet>
-    <div *ngIf="vehicles">
-      <hr>
-      <div class="card-columns">
-        <div class="card animated fadeIn fast" *ngFor="let vehiculo of vehicles">
-          <div class="card-block">
-            <img class="card-img-top img-thumbnail" [src]="'assets/img/fleet/jeep.jpg'">
-            <hr>
-            <h6 class="card-title">{{ vehiculo.Marca }}<small> {{ vehiculo.model }}</small></h6>
-            <p class="card-text"><small class="text-muted">{{ vehiculo.type }}</small></p>
-            <p class="card-text"><small class="text-muted">{{ vehiculo.transmission }}</small></p>
-            <div class="card-footer">
-              <button
-                  type="button"
-                  (click)="verDetalle(vehiculo.id)"
-                  class="btn btn-outline-success">Reservar
-              </button>
+      <div *ngIf="vehicles">
+        <hr>
+        <div class="row">
+          <div class="col-md-3" *ngFor="let vehiculo of vehicles">
+            <div class="card animated fadeIn fast">
+              <div class="card-block">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="carousel-item active" *ngIf="vehiculo.image1">
+                      <img [src]="path+country+'/'+city+'/'+vehiculo.fleetId+'/'+vehiculo.id+'/'+vehiculo.image1" class="img-thumbnail">
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <h6 class="card-title">{{ vehiculo.Marca }}<small> {{ vehiculo.model }}</small></h6>
+                <p class="card-text"><small class="text-muted">{{ vehiculo.type }}</small></p>
+                <p class="card-text"><small class="text-muted">{{ vehiculo.transmission }}</small></p>
+                <div class="card-footer">
+                  <button
+                      type="button"
+                      (click)="verDetalle(vehiculo.id)"
+                      class="btn btn-outline-success">Reservar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

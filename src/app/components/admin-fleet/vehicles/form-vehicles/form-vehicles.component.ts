@@ -33,12 +33,15 @@ export class FormVehiclesComponent  {
                   'priceDiary':new FormControl('0',[Validators.required]),
                   'protectionPrice':new FormControl('0',[Validators.required]),
                   'deductible':new FormControl('0',[Validators.required]),
+                  'personalAccidentInsurancePrice':new FormControl('0',[Validators.required]),
+                  'excessLimitRCVPrice':new FormControl('0',[Validators.required]),
                   'transmission':new FormControl('0',[Validators.required]),
                   'year':new FormControl('0',[Validators.required]),
                   'type':new FormControl('0',[Validators.required]),
                   'passengers':new FormControl('0',[Validators.required]),
                   'rubbers':new FormControl('0',[Validators.required]),
                   'spareRubbers':new FormControl('0',[Validators.required]),
+                  'protectionAgainstTheftPrice':new FormControl('0',[Validators.required]),
                   'isDelete':new FormControl('')
                 });
               this.activatedRoute.params.subscribe(p => {
@@ -59,6 +62,9 @@ export class FormVehiclesComponent  {
               passengers:data.passengers,
               rubbers:data.rubbers,
               spareRubbers:data.spareRubbers,
+              personalAccidentInsurancePrice:data.personalAccidentInsurancePrice,
+              excessLimitRCVPrice:data.excessLimitRCVPrice,
+              protectionAgainstTheftPrice:data.protectionAgainstTheftPrice,
               isDelete: (data.isDelete == "1"?true:false)
             }
             this.vehicle = datos;
@@ -79,6 +85,9 @@ export class FormVehiclesComponent  {
             passengers:'',
             rubbers:'',
             spareRubbers:'',
+            personalAccidentInsurancePrice:'',
+            excessLimitRCVPrice:'',
+            protectionAgainstTheftPrice:'',
             isDelete: false
           }
           this.title = "Nuevo";
@@ -105,6 +114,13 @@ export class FormVehiclesComponent  {
    this._config.setVehicles(this.formulario.value,files).subscribe(() => {
      this.loading = false;
    });
+  }
+  onChangeFleet(id:number){
+    this._config.getTypeFleetsById(id).subscribe( data =>{
+      this.formulario.get('protectionAgainstTheftPrice').setValue(data.protectionAgainstTheftPrice);
+      this.formulario.get('personalAccidentInsurancePrice').setValue(data.personalAccidentInsurancePrice);
+      this.formulario.get('excessLimitRCVPrice').setValue(data.excessLimitRCVPrice);
+    });
   }
 
 }

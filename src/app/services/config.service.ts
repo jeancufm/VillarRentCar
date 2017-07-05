@@ -186,6 +186,7 @@ export class ConfigService {
       });
   }
   setVehicles(vehicles:any, archivos:File[]){
+    console.log(vehicles);
     let query = "vehicleRegisterUpdate.php";
     let formData = new FormData();
     if (archivos.length > 0) {

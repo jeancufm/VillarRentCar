@@ -63,19 +63,6 @@ export class ReservacionComponent implements OnInit {
         this.country = data;
       });
   }
-  searchOptions(){
-    this._reservacionService.reservacion.fleetId = 0;
-    this._reservacionService.opcionesReturn = "";
-    this._reservacionService.reservacion.returnCityId = 0;
-    this._reservacionService.reservacion.returnDiferent = false;
-    this._reservacionService.opciones = [];
-    if(this.formulario.get('InitLocation').value.length > 2 )
-    {
-      this._reservacionService.searchCountry(this.formulario.get('InitLocation').value).subscribe(data => {
-        this._reservacionService.opciones = data
-      });
-    }
-  }
   getTypeFleet(id){
     this.typeFleet = null;
     this.formulario.get('Fleet').setValue("");

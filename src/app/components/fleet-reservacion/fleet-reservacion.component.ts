@@ -46,7 +46,8 @@ export class FleetReservacionComponent implements OnInit {
         });
     }
     seleccionar(id,Modelo,Marca){
-      this._router.navigate(['/reservacionIni/detail',id]);
+      this._ReservacionService.reservacion.idVehicle = id;
+      this._router.navigate(['/reservacionEnd']);
 
     }
     onChange(newValue) {

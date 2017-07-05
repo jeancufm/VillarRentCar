@@ -11,6 +11,7 @@
       <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('fleetId').errors?.required && !formulario.get('fleetId').untouched }">
           <label for="fleetId">fleetId</label>
           <select class="custom-select form-control"
+                  (change)="onChangeFleet($event.target.value)"
                   formControlName="fleetId">
             <option  value="" selected>Seleccione...</option>
             <option [value]="typeFleet.id" *ngFor="let typeFleet of typeFleets">{{ typeFleet.name }}</option>
@@ -48,6 +49,22 @@
           <label for="protectionPrice">protectionPrice</label>
           <input type="number" class="form-control form-control-sm" formControlName="protectionPrice" />
           <div *ngIf="formulario.get('protectionPrice').errors?.required && !formulario.get('protectionPrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('personalAccidentInsurancePrice').errors?.required && !formulario.get('personalAccidentInsurancePrice').untouched }">
+          <label for="name">personalAccidentInsurancePrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="personalAccidentInsurancePrice" />
+          <div *ngIf="formulario.get('personalAccidentInsurancePrice').errors?.required && !formulario.get('personalAccidentInsurancePrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('excessLimitRCVPrice').errors?.required && !formulario.get('excessLimitRCVPrice').untouched }">
+          <label for="name">excessLimitRCVPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="excessLimitRCVPrice" />
+          <div *ngIf="formulario.get('excessLimitRCVPrice').errors?.required && !formulario.get('excessLimitRCVPrice').untouched"  class="help-block">excessLimitRCVPrice is required</div>
       </div>
     </div>
   </div>
@@ -107,6 +124,15 @@
           <div *ngIf="formulario.get('deductible').errors?.required && !formulario.get('deductible').untouched"  class="help-block">deductible is required</div>
       </div>
     </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('protectionAgainstTheftPrice').errors?.required && !formulario.get('protectionAgainstTheftPrice').untouched }">
+          <label for="name">protectionAgainstTheftPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="protectionAgainstTheftPrice" />
+          <div *ngIf="formulario.get('protectionAgainstTheftPrice').errors?.required && !formulario.get('protectionAgainstTheftPrice').untouched"  class="help-block">protectionAgainstTheftPrice is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" formControlName="isDelete">

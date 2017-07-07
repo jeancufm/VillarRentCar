@@ -9,6 +9,7 @@ export class ConfigService {
   urlBusqueda:string = "http://localhost:90/VillaCarApi/"
   city:any;
   typeFleet:any;
+  reservation:any;
   getCountry(){
     let query = "country.php";
     let url = this.urlBusqueda + query;
@@ -149,6 +150,20 @@ export class ConfigService {
         return resp.json();
       });
   }
+  getReservation(id:number = 0){
+    let query = "reservation.php";
+    let url = this.urlBusqueda +(id==0?query:query+"?id="+id);
+    return this.http.get(url)
+      .map( resp=>{
+        if (resp.json().Fallo != undefined)
+        {
+          this.reservation = null;
+          return this.reservation;
+        }
+        this.reservation = resp.json();
+        return resp.json();
+      });
+  }
   setCountry(country:any){
     let query = "countryRegisterUpdate.php";
     let url = this.urlBusqueda + query;
@@ -186,7 +201,6 @@ export class ConfigService {
       });
   }
   setVehicles(vehicles:any, archivos:File[]){
-    console.log(vehicles);
     let query = "vehicleRegisterUpdate.php";
     let formData = new FormData();
     if (archivos.length > 0) {
@@ -197,6 +211,18 @@ export class ConfigService {
     formData.append('tags', JSON.stringify(vehicles));
     let url = this.urlBusqueda + query;
     return this.http.post(url,formData)
+      .map( resp=>{
+        if (resp.json().Fallo != undefined)
+        {
+          return null;
+        }
+        return resp.json();
+      });
+  }
+  getStatus(id:number = 0){
+    let query = "status.php";
+    let url = this.urlBusqueda +(id==0?query:query+"?id="+id);
+    return this.http.get(url)
       .map( resp=>{
         if (resp.json().Fallo != undefined)
         {

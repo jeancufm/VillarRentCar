@@ -35,6 +35,12 @@ import { FormCountryComponent } from './components/admin-fleet/country/form-coun
 import { FormTypeFleetComponent } from './components/admin-fleet/type-fleet/form-type-fleet/form-type-fleet.component';
 import { FormVehiclesComponent } from './components/admin-fleet/vehicles/form-vehicles/form-vehicles.component';
 import { NgDropFileDirective } from './directives/ng-drop-file.directive';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { EditReservacionComponent } from './components/operaciones/reservacion/edit-reservacion/edit-reservacion.component';
+import { ReservacionOperacionesComponent } from './components/operaciones/reservacion/reservacionOperaciones.component';
+import { AdminClubComponent } from './components/admin-club/admin-club.component';
+import { PromotorComponent } from './components/admin-club/promotor/promotor.component';
+import { UserComponent } from './components/admin-club/user/user.component';
 
 @NgModule({
     imports: [
@@ -67,7 +73,13 @@ import { NgDropFileDirective } from './directives/ng-drop-file.directive';
         FormCountryComponent,
         FormTypeFleetComponent,
         FormVehiclesComponent,
-        NgDropFileDirective
+        NgDropFileDirective,
+        OperacionesComponent,
+        EditReservacionComponent,
+        ReservacionOperacionesComponent,
+        AdminClubComponent,
+        PromotorComponent,
+        UserComponent
     ],
     providers: [
         AuthGuard,

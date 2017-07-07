@@ -7,8 +7,12 @@ import { AuthGuard } from './guards/index';
 import { FleetComponent } from './components/fleet/fleet.component';
 import { ReservacionEndComponent } from './components/reservacion-end/reservacion-end.component';
 import { AdminFleetComponent } from './components/admin-fleet/admin-fleet.component';
+import { AdminClubComponent } from './components/admin-club/admin-club.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
 import { FleetReservacionComponent } from './components/fleet-reservacion/fleet-reservacion.component';
 import { FLEETS_ROUTES } from './components/admin-fleet/admin-fleet.route';
+import { OPERACIONES_ROUTES } from './components/operaciones/operaciones.route';
+import { CLUB_ROUTES } from './components/admin-club/admin-club.route';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -27,8 +31,14 @@ const appRoutes: Routes = [
     },
     {
       path: 'adminClub',
-      component: AdminFleetComponent,
-      children: FLEETS_ROUTES,
+      component: AdminClubComponent,
+      children: CLUB_ROUTES,
+      canActivate: [AuthGuard]
+    },
+    {
+      path:'operaciones',
+      component: OperacionesComponent ,
+      children:OPERACIONES_ROUTES,
       canActivate: [AuthGuard]
     },
     { path:'reservacionEnd', component: ReservacionEndComponent /*, canActivate: [AuthGuard]  */},

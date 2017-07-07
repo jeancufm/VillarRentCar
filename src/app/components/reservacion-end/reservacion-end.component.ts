@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservacionService,UserInfoService,FleetService,AuthenticationService, ConfigService } from '../../services/index';
+import { ReservacionService,UserInfoService,FleetService,AuthenticationService, ConfigService,AlertService } from '../../services/index';
 import { Router } from '@angular/router';
 
 declare var $:any;
@@ -38,7 +38,8 @@ export class ReservacionEndComponent implements OnInit {
               private _reservacionService:ReservacionService,
               private _fleetService:FleetService,
               private _router:Router,
-              private _ConfigService:ConfigService) { }
+              private _ConfigService:ConfigService,
+              private _AlertService:AlertService) { }
   ageSelect:string[] = ["18","19","20","21","22","23","24","25","26","27","28","29","30-69","70+"];
   ngOnInit() {
     if(!this._reservacionService.reservacion.idVehicle || this._reservacionService.reservacion.fleetId == 0)
@@ -88,7 +89,7 @@ export class ReservacionEndComponent implements OnInit {
 
     let reservacion = this.asignarDatos(forma.value);
     this._reservacionService.SolicitudReservacion(reservacion);
-    /*this._reservacionService.reservacion = {
+    this._reservacionService.reservacion = {
       CountryId:0,
       CityId:0,
       fleetId:0,
@@ -100,8 +101,8 @@ export class ReservacionEndComponent implements OnInit {
       mail:"",
       codePromotion:"",
       idVehicle:0
-    };*/
-    //this._router.navigate(['home']);
+    };
+    this._AlertService.success("Registration sucessful",true);
   }
   cancelar(){
     this._reservacionService.reservacion = {

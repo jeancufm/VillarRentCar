@@ -14,6 +14,8 @@ export class AuthGuard implements CanActivate {
                 return true;
             }else if(route.url[0].path == "adminClub" && (rol == "AdminGlobal" || rol == "AdminClub")){
                 return true;
+            }else if(route.url[0].path == "operaciones" && (rol == "AdminGlobal" || rol == "operaciones")){
+                  return true;
             }else{
               return false;
             }

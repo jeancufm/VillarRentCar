@@ -43,9 +43,20 @@
                                                             (_authenticationService.getRole() == 'AdminGlobal' ||
                                                              _authenticationService.getRole() == 'AdminClub' )">
         <span class="navbar-text">
-          <a [routerLink]="['adminClub']">
+          <a [routerLink]="['adminClub/Promotores']">
             <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
               <span class="text hidden-sm-down">Admin Club</span>
+            </span>
+          </a>
+        </span>
+      </li>
+      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
+                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
+                                                             _authenticationService.getRole() == 'operaciones' )">
+        <span class="navbar-text">
+          <a [routerLink]="['operaciones/reservacion']">
+            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
+              <span class="text hidden-sm-down">Operciones</span>
             </span>
           </a>
         </span>

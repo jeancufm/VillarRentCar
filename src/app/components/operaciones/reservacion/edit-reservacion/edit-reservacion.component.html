@@ -1,0 +1,208 @@
+<h5>{{ title }}</h5>
+<form name="form" [formGroup]="formulario" (ngSubmit)="submit()" #r="ngForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="id">Id</label>
+          <input type="text" disabled="true" class="form-control form-control-sm" formControlName="id" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="userId">mail</label>
+          <input type="text" disabled="true" class="form-control form-control-sm" formControlName="mail" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="initDate">init Date</label>
+          <input type="date" class="form-control form-control-sm" formControlName="initDate" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="returnDate">return Date</label>
+          <input type="date" class="form-control form-control-sm" formControlName="returnDate" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="CountDays">Count Days</label>
+          <input type="number" class="form-control form-control-sm" formControlName="CountDays" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('StatusId').errors?.required && !formulario.get('StatusId').untouched }">
+        <label for="typefleet">Status</label>
+          <select class="custom-select form-control"
+                  formControlName="StatusId">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="status.id" *ngFor="let status of statuses">{{ status.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('StatusId').errors?.required && !formulario.get('StatusId').untouched"  class="help-block">status is required</div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('country').errors?.required && !formulario.get('country').untouched }">
+        <label for="name">Country</label>
+          <select class="custom-select form-control"
+                  formControlName="country"
+                  (change)="onChangeCountry($event.target.value)">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="country.id" *ngFor="let country of countrys">{{ country.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('country').errors?.required && !formulario.get('country').untouched"  class="help-block">Country is required</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('city').errors?.required && !formulario.get('city').untouched }">
+        <label for="returnCityId">city</label>
+          <select class="custom-select form-control"
+                  (change)="onChangeCity($event.target.value)"
+                  formControlName="returnCityId">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="city.id" *ngFor="let city of citys">{{ city.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('returnCityId').errors?.required && !formulario.get('returnCityId').untouched"  class="help-block">return city is returnCityId</div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('typefleet').errors?.required && !formulario.get('typefleet').untouched }">
+        <label for="typefleet">typefleet</label>
+          <select class="custom-select form-control"
+                  (change)="onChangeTypeFleet($event.target.value)"
+                  formControlName="typefleet">
+            <option  value="" selected>Seleccione...</option>
+            <option [value]="typeFleet.id" *ngFor="let typeFleet of typeFleets">{{ typeFleet.name }}</option>
+          </select>
+          <div *ngIf="formulario.get('typefleet').errors?.required && !formulario.get('typefleet').untouched"  class="help-block">fleet is required</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('VehicleId').errors?.required && !formulario.get('VehicleId').untouched }">
+          <label for="VehicleId">VehicleId</label>
+            <select class="custom-select form-control"
+                    formControlName="VehicleId">
+              <option  value="" selected>Seleccione...</option>
+              <option [value]="vehicle.id" *ngFor="let vehicle of vehicles">{{ vehicle.brand }}</option>
+            </select>
+            <div *ngIf="formulario.get('typefleet').errors?.required && !formulario.get('typefleet').untouched"  class="help-block">fleet is required</div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="priceDiary">priceDiary</label>
+          <input type="number" class="form-control form-control-sm" formControlName="priceDiary" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="protectionPrice">protectionPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="protectionPrice" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="protectionAgainstTheftPrice">protectionAgainstTheftPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="protectionAgainstTheftPrice" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="minorDriverPrice">minorDriverPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="minorDriverPrice" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="personalAccidentInsurancePrice">personalAccidentInsurancePrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="personalAccidentInsurancePrice" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="aditionalDrivePrice">aditionalDrivePrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="aditionalDrivePrice" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="CodeDescount">CodeDescount</label>
+          <input type="text" class="form-control form-control-sm" formControlName="CodeDescount" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="Descount">Descount</label>
+          <input type="number" class="form-control form-control-sm" formControlName="Descount" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="SubTotal">SubTotal</label>
+          <input type="number" class="form-control form-control-sm" formControlName="SubTotal" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="IVA">IVA</label>
+          <input type="number" class="form-control form-control-sm" formControlName="IVA" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="excessLimitRCVPrice">excessLimitRCVPrice</label>
+          <input type="number" class="form-control form-control-sm" formControlName="excessLimitRCVPrice" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+          <label for="Total">Total</label>
+          <input type="number" class="form-control form-control-sm" formControlName="Total" />
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" formControlName="isDelete">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">IsDelete</span>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <button type="submit"
+                  [disabled]="!formulario.valid"
+                  class="btn btn-primary">Register</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <button type="button" [routerLink]="['/operaciones/reservacion']" class="btn btn-danger">Volver</button>
+      </div>
+    </div>
+  </div>
+</form>

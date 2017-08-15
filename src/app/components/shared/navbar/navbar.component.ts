@@ -14,7 +14,13 @@ export class NavbarComponent implements OnInit {
   constructor(private _userInfoService:UserInfoService,
               private _authenticationService:AuthenticationService,
               private router:Router) {
-                this._userInfoService.getUbicacion().subscribe( data => this._userInfoService.countryLocated = data );
+                this._userInfoService.getUbicacion().subscribe( data => {
+                  if(data == "Venezuela"){
+                    this._userInfoService.countryLocated = "1";
+                  }else{
+                    this._userInfoService.countryLocated = "3";
+                  }
+                } );
 
   }
 

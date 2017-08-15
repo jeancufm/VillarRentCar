@@ -1,7 +1,11 @@
 
-<div class="jumbotron bg-home hidden-lg-down" style="background-image:url('../../assets/img/background/banner.png')">
-  <h3 class="display-3 text-center">Alquile ya un gran vehículo, al mejor precio!!</h3>
-</div>
+<div
+    *ngIf="userInfo.countryLocated == '1'"
+    class="jumbotron bg-home hidden-lg-down"
+    style="background-image:url('../../assets/img/background/Venezuela.jpg'); margin-top:40px;height: 360px;"></div>
+<div *ngIf="userInfo.countryLocated == '3'"
+      class="jumbotron bg-home hidden-lg-down"
+      style="background-image:url('../../assets/img/background/Panama.jpg'); margin-top:40px;height: 360px;"></div>
 
 <div class="container-fluid main-container">
   <div class="row">
@@ -12,19 +16,29 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="card">
-            <div class="card-block">
-              <h3 class="card-title">Viaje cómodo y seguro!!</h3>
-              <p class="card-text">Con los vehiculos más confortables y que le brindan bienestar a la familia!!.</p>
-              <a href="#" class="btn btn-primary">Ver vehiculos</a>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card-block">
+                  <h3 class="card-title">Viaje cómodo y seguro!!</h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <img src="assets/img/viajeComodo.jpg" class="imgCard">
+              </div>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card">
-            <div class="card-block">
-              <h3 class="card-title">Promociones!!!</h3>
-              <p class="card-text">Aproveche estas vacaciones!!! con nuestros precios unicos en el mercado..</p>
-              <a href="#" class="btn btn-primary">Promociones</a>
+            <div class="row">
+             <div class="col-md-6">
+               <div class="card-block">
+                 <h3 class="card-title">Conoce nuestras promociones.</h3>
+               </div>
+             </div>
+             <div class="col-md-6">
+               <img src="assets/img/promociones.jpg" class="imgCard">
+             </div>
             </div>
           </div>
         </div>

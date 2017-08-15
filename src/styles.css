@@ -1,16 +1,12 @@
 .main-container{
   margin-top: 40px;
 }
-body{
-  background-color: #ffff;
-}
 .bg-faded {
     background-color: #ffffff;
 }
 .reservacion{
     background-color: #95B02D;
-    border: 3px solid aliceblue;
-    border-radius: 20px;
+    border-radius: 60px;
     padding: 10px;
 }
 /* Animaciones */
@@ -20,7 +16,31 @@ body{
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
-
+.formReservacion{
+  color: black;
+  font-size: 0.80rem;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.devolucionLabel{
+    font-size: 0.70rem;
+}
+.titleReservation {
+  text-align: left;
+  color: white;
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 0.80rem;
+}
+.btn-submit {
+  color: white;
+  background-color: black;
+}
+.btn-submit:disabled {
+  color: white;
+  background-color: black;
+}
 .fast {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
@@ -57,9 +77,11 @@ body{
   }
 }
 @media (min-width: 1200px) {
-  .reservacion{
-    margin-top: -200px;
-  }
+  .reservacion {
+    margin-top: -400px;
+    width: 560px;
+    height: 360px;
+}
 }
 .bg-home{
   width: 100%;
@@ -69,20 +91,14 @@ body{
   border-radius: 0px;
 }
 .logo{
-  margin-left: 40px;
-  width: 80px;
-  height: 40px;
+  margin-left: 20px;
+  width: 140px;
 }
 
 
 .nav li::before {
-
-content: "|";
-
-padding-right: 5px;
-
-padding-left: 5px;
-
+  padding-right: 10px;
+  padding-left: 10px;
 }
 a {
   cursor:default;
@@ -185,4 +201,41 @@ a {
 
 .text-green {
 	color: green
+}
+.form-group {
+    margin-bottom: 0.5rem;
+}
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.letterNavBar{
+  color: black !important;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.mr-autoModif {
+    margin-left: auto!important;
+}
+.nav-link {
+    display: -webkit-inline-box !important;
+}
+.imgBanderas{
+  width: 60px;
+}
+.imgBanderas1{
+  width: 50px;
+}
+.imgCard{
+  width: 100%;
+  height: 100%;
+}
+.condicionesReservacionHome{
+  color: black;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  font-weight: 600;
 }

@@ -5,92 +5,85 @@
   <a class="navbar-brand" [routerLink]="['home']">
      <img src="assets/img/logo/logo.gif" class="logo" alt="">
    </a>
-  <div class="collapse navbar-collapse options-nav" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-
-    </ul>
-    <ul class="nav justify-content-end">
+  <div class="collapse navbar-collapse " id="navbarText">
+    <ul class="navbar-nav mr-autoModif">
       <li class="nav-item" routerLinkActive="activo">
-        <span class="navbar-text">
           <a [routerLink]="['home']">
-            <span class="navbar-text"><i class="fa fa-home" aria-hidden="true"></i>
-              <span class="text hidden-sm-down">Inicio</span>
-            </span>
+              <span class="nav-link letterNavBar">Inicio</span>
           </a>
-        </span>
       </li>
       <li class="nav-item" routerLinkActive="activo">
-        <span class="navbar-text">
           <a [routerLink]="['fleet']">
-            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
-              <span class="text hidden-sm-down">Flota de vehiculos</span>
-            </span>
+              <span class="nav-link letterNavBar">Tarifas y Reservas</span>
           </a>
-        </span>
+      </li>
+
+      <li class="nav-item" routerLinkActive="activo">
+          <a [routerLink]="['fleet']">
+              <span class="nav-link letterNavBar">Flota</span>
+          </a>
+      </li>
+      <li class="nav-item" routerLinkActive="activo">
+          <a [routerLink]="['fleet']">
+              <span class="nav-link letterNavBar">Oficinas</span>
+          </a>
+      </li>
+      <li class="nav-item" routerLinkActive="activo">
+          <a [routerLink]="['fleet']">
+              <span class="nav-link letterNavBar">Contacto</span>
+          </a>
       </li>
       <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
                                                             (_authenticationService.getRole() == 'AdminGlobal' ||
                                                              _authenticationService.getRole() == 'AdminFlota' )">
-        <span class="navbar-text">
           <a [routerLink]="['adminFleet/country']">
-            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
-              <span class="text hidden-sm-down">Admin Flota</span>
-            </span>
+              <span class="nav-link letterNavBar">Admin Flota</span>
           </a>
-        </span>
       </li>
       <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
                                                             (_authenticationService.getRole() == 'AdminGlobal' ||
                                                              _authenticationService.getRole() == 'AdminClub' )">
-        <span class="navbar-text">
           <a [routerLink]="['adminClub/Promotores']">
-            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
-              <span class="text hidden-sm-down">Admin Club</span>
-            </span>
+              <span class="nav-link letterNavBar">Admin Club</span>
           </a>
-        </span>
       </li>
       <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
                                                             (_authenticationService.getRole() == 'AdminGlobal' ||
                                                              _authenticationService.getRole() == 'operaciones' )">
-        <span class="navbar-text">
           <a [routerLink]="['operaciones/reservacion']">
-            <span class="navbar-text"><i class="fa fa-1x fa-car" aria-hidden="true"></i>
-              <span class="text hidden-sm-down">Operciones</span>
-            </span>
+              <span class="nav-link letterNavBar">Operciones</span>
           </a>
-        </span>
       </li>
       <li class="nav-item">
-        <span class="navbar-text">
           <div class="dropdown" *ngIf="language == 'es'">
             <button class="dropdown-toggle languaje" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img [src]="language | bandera" class="img-fluid pull-xs-left text" alt="...">
+             <span class="nav-link letterNavBar">{{ language | uppercase }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button" (click)="language = 'en'"> <img [src]="'en' | bandera" class="img-fluid pull-xs-left text" alt="..."></button>
+              <button class="dropdown-item" type="button" (click)="language = 'en'"><span class="nav-link letterNavBar">EN</span></button>
             </div>
           </div>
           <div class="dropdown" *ngIf="language == 'en'">
             <button class="dropdown-toggle languaje" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img [src]="language | bandera" class="img-fluid pull-xs-left text" alt="...">
+               <span class="nav-link letterNavBar">{{ language | uppercase }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button" (click)="language = 'es'"> <img [src]="'es' | bandera" class="img-fluid pull-xs-left text" alt="..."></button>
+              <button class="dropdown-item" type="button" (click)="language = 'es'"> <span class="nav-link letterNavBar">ES</span></button>
             </div>
           </div>
-        </span>
       </li>
       <li class="nav-item">
-        <span class="navbar-text">
           <a *ngIf="!_authenticationService.authenticated()" data-toggle="modal"
                   data-target="#LoginModal">
-            <i class="fa fa-1x fa-sign-in"></i> <span class="text hidden-sm-down">Iniciar Sesión</span>
+            <span class="nav-link letterNavBar">Iniciar Sesión</span>
           </a>
           <a (click)="logout()" *ngIf="_authenticationService.authenticated()">
-            <i class="fa fa-1x fa-sign-out"></i><span class="text hidden-sm-down"> Cerrar sesión</span>
+            <span class="nav-link letterNavBar"> Cerrar sesión</span>
           </a>
-        </span>
+      </li>
+      <li class="nav-item">
+          <a  (click)="_userInfoService.countryLocated = 1"><img src="assets/img/logo/Venezuela.png" class="imgBanderas" alt=""></a>
+          <a  (click)="_userInfoService.countryLocated = 3"><img src="assets/img/logo/Panama.png" class="imgBanderas1" alt=""></a>
       </li>
     </ul>
   </div>

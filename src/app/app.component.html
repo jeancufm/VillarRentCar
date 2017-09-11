@@ -4,7 +4,30 @@
 </div>
 <router-outlet></router-outlet>
 <footer class="footer">
-  <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
-  </div>
+  <nav class="navbar-footer navbar navbar-toggleable-md navbar-light bg-faded ">
+    <div class="collapse navbar-collapse " id="navbarText">
+      <ul class="navbar-nav" style="margin-left:40%;">
+        <li class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['home']">
+                <span class="nav-link letterNavBar">Inicio</span>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['fleet']">
+                <span class="nav-link letterNavBar">Flota</span>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['fleet']">
+                <span class="nav-link letterNavBar">Oficinas</span>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['fleet']">
+                <span class="nav-link letterNavBar">Contacto</span>
+            </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </footer>

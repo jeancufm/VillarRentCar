@@ -6,7 +6,7 @@ import { User, Login} from '../models/index';
 @Injectable()
 export class UserService {
     constructor(private http: Http) { }
-    url:string = "http://localhost:90/VillaCarApi/"
+    url:string = "http://localhost/VillaCarApi/"
 
     getAll() {
         return this.http.get('/api/users', this.jwt()).map((response: Response) => response.json());
@@ -24,7 +24,7 @@ export class UserService {
       })
     }
     create(user: User) {
-        return this.http.post(this.url+"register.php", user).map((response: Response) => {
+        return this.http.post(this.url+"UserRegisterUpdate.php", user).map((response: Response) => {
           response;
         })
     }

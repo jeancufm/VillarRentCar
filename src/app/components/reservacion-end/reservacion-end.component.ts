@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReservacionService,UserInfoService,FleetService,AuthenticationService, ConfigService,AlertService } from '../../services/index';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ declare var $:any;
   selector: 'app-reservacion-end',
   templateUrl: './reservacion-end.component.html'
 })
-export class ReservacionEndComponent implements OnInit {
+export class ReservacionEndComponent implements OnInit, OnDestroy {
 
   path:string;
   image1:string;
@@ -39,10 +39,11 @@ export class ReservacionEndComponent implements OnInit {
               private _fleetService:FleetService,
               private _router:Router,
               private _ConfigService:ConfigService,
-              private _AlertService:AlertService) { }
-  ageSelect:string[] = ["18","19","20","21","22","23","24","25","26","27","28","29","30-69","70+"];
+              private _AlertService:AlertService) {
+                this._ConfigService.ruta = 'reservation';
+}
   ngOnInit() {
-    if(!this._reservacionService.reservacion.idVehicle || this._reservacionService.reservacion.fleetId == 0)
+    if(!this._reservacionService.reservacion.idVehicle)
     {
       this._router.navigate(['home']);
     }else{
@@ -53,16 +54,15 @@ export class ReservacionEndComponent implements OnInit {
       }
       this._fleetService.getVehicleInfo(this._reservacionService.reservacion.idVehicle).subscribe(data =>{
                                           this.VehicleInfo = data[0];
-                                          this.path="http://localhost:90/VillaCarApi/uploads/"+this.VehicleInfo.idCountry+"/"+this.VehicleInfo.idCity+"/"
-                                                    +this.VehicleInfo.idFleet+"/"+this.VehicleInfo.idVehicle+"/";
+                                          this.path="http://localhost/VillaCarApi/uploads/"+this.VehicleInfo.id+"/";
                                           this.image1 = this.VehicleInfo.image1;
                                           this.image2 = this.VehicleInfo.image2;
                                           this.image3 = this.VehicleInfo.image3;
-                                          this._ConfigService.getTypeFleet(this._reservacionService.reservacion.fleetId)
+                                          this._ConfigService.getTypeFleetsById(this.VehicleInfo.fleetId)
                                               .subscribe(data =>{
-                                                          if(data.length>0)
+                                                          if(data)
                                                           {
-                                                            this.FleetInfo = data[0];
+                                                            this.FleetInfo = data;
                                                             this.sumar();
                                                           }
                                                         })
@@ -84,11 +84,9 @@ export class ReservacionEndComponent implements OnInit {
       $('#LoginModal').modal('show');
       return;
     }
-
     this._reservacionService.reservacion.returnCityId = this._reservacionService.reservacion.returnDiferent?this._reservacionService.reservacion.returnCityId:this._reservacionService.reservacion.CityId;
-
     let reservacion = this.asignarDatos(forma.value);
-    this._reservacionService.SolicitudReservacion(reservacion);
+    this._reservacionService.SolicitudReservacion(reservacion).subscribe( data =>{ });
     this._reservacionService.reservacion = {
       CountryId:0,
       CityId:0,
@@ -159,5 +157,7 @@ export class ReservacionEndComponent implements OnInit {
     return reservacion;
 
   }
-
+  ngOnDestroy(){
+    this._ConfigService.ruta = 'home';
+  }
 }

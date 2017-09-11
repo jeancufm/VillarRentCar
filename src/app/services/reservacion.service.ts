@@ -6,7 +6,7 @@ import { IReservacion } from '../clases/reservacion.class';
 @Injectable()
 export class ReservacionService {
 
-  urlBusqueda:string = "http://localhost:90/VillaCarApi/";
+  urlBusqueda:string = "http://localhost/VillaCarApi/";
   reservacion:IReservacion = {
     CountryId:0,
     CityId:0,
@@ -29,7 +29,7 @@ export class ReservacionService {
     let url = this.urlBusqueda + query;
     return this.http.post(url,reservacion)
       .map( resp=>{
-        if (resp.json().Fallo != undefined)
+        if (!resp.json())
         {
           return null;
         }

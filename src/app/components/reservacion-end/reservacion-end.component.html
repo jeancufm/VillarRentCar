@@ -222,7 +222,7 @@
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label for="returnDiferent">¿Devolverá el vehículo en otra ubicación?</label>
-                      <input type="checkbox" [(ngModel)]="_reservacionService.reservacion.returnDiferent" name="returnDiferent">
+                      <input type="checkbox" [(ngModel)]="!_reservacionService.reservacion.returnDiferent" name="returnDiferent">
                     </div>
                   </div>
                 </div>
@@ -260,24 +260,6 @@
                                La fecha de retorno es requerida
                              </div>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                        <h6>Edad</h6>
-                        <select class="custom-select form-control form-control-sm h-25"
-                                name="age"
-                                [(ngModel)]="_reservacionService.reservacion.age"
-                                required
-                                #age="ngModel">
-                          <option  value="" selected>Edad</option>
-                          <option [value]="age" *ngFor="let age of ageSelect">{{ age }}</option>
-                        </select>
-                        <div  *ngIf="age.errors?.required && !age.untouched" class="form-control-feedback">
-                          Debe indicar su edad.
-                        </div>
-                      </div>
                   </div>
                 </div>
                 <div class="row">

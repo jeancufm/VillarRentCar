@@ -1,0 +1,19 @@
+<div class="steps clearfix" *ngIf="this._config.ruta == 'fleet' || this._config.ruta == 'reservation'">
+  <ul role="tablist">
+    <li role="tab" class="first" aria-disabled="false" aria-selected="true" routerLinkActive="active">
+      <a id="steps-uid-1-t-0"  aria-controls="steps-uid-1-p-0">
+        <span class="number">1.</span> Tarifas y reservas
+      </a>
+    </li>
+    <li role="tab" aria-disabled="false" aria-selected="true" class="current"
+              [ngClass]="{'current':this._config.ruta=='fleet'}">
+      <a id="steps-uid-1-t-0"  aria-controls="steps-uid-1-p-0">
+        <span class="number">2.</span> Flota
+      </a>
+    </li>
+    <li role="tab" class="last" aria-disabled="true" [ngClass]="{'current':this._config.ruta=='reservation'}">
+      <a id="steps-uid-1-t-3"  aria-controls="steps-uid-1-p-3">
+        <span class="number">3.</span> Reservacion
+      </a>
+    </li>
+  </ul></div>

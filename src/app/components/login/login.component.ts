@@ -28,9 +28,9 @@ export class LoginComponent {
         this._auth.authenticate(this.model)
             .subscribe(
                 data => {
-                    if(data.json().RESPUESTA == "OK" ){
+                    if(data.json().id != undefined ){
                       let user = data.json();
-                        if (user && user.token) {
+                        if (user) {
                             // store user details and jwt token in local storage to keep user logged in between page refreshes
                             localStorage.setItem('currentUser', JSON.stringify(user));
                         }

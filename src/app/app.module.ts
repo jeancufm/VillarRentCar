@@ -41,6 +41,8 @@ import { ReservacionOperacionesComponent } from './components/operaciones/reserv
 import { AdminClubComponent } from './components/admin-club/admin-club.component';
 import { PromotorComponent } from './components/admin-club/promotor/promotor.component';
 import { UserComponent } from './components/admin-club/user/user.component';
+import { FormPromotorComponent } from './components/admin-club/promotor/form-promotor/form-promotor.component';
+import { WizardComponent } from './components/shared/wizard/wizard.component';
 
 @NgModule({
     imports: [
@@ -79,7 +81,9 @@ import { UserComponent } from './components/admin-club/user/user.component';
         ReservacionOperacionesComponent,
         AdminClubComponent,
         PromotorComponent,
-        UserComponent
+        UserComponent,
+        FormPromotorComponent,
+        WizardComponent
     ],
     providers: [
         AuthGuard,

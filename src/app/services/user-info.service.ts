@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserInfoService {
   urlUbicacion:string = "http://api.wipmania.com/jsonp?callback=JSONP_CALLBACK";
-  countryLocated:string = "EE.UU";
+  countryLocated:string = "2";
   constructor(private http:Http,
               private _jsonp:Jsonp) {  }
 

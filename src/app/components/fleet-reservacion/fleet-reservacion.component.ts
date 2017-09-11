@@ -7,7 +7,7 @@ import { UserInfoService, ReservacionService, ConfigService } from '../../servic
   selector: 'app-fleet',
   templateUrl: './fleet-reservacion.component.html'
 })
-export class FleetReservacionComponent implements OnInit {
+export class FleetReservacionComponent implements OnInit,OnDestroy {
 
   fleet:any[];
   vehicles:any;
@@ -20,7 +20,9 @@ export class FleetReservacionComponent implements OnInit {
                 private _UserInfoService:UserInfoService,
                 private _router:Router,
                 private _ReservacionService:ReservacionService,
-                private _ConfigService:ConfigService) {}
+                private _ConfigService:ConfigService) {
+                  this._ConfigService.ruta = 'fleet';
+                }
     ngOnInit() {
       if(this._ReservacionService.reservacion.CountryId === 0){
         this._router.navigate(['home']);
@@ -30,16 +32,18 @@ export class FleetReservacionComponent implements OnInit {
       });
       this._ConfigService.getTypeFleet(this._ReservacionService.reservacion.CityId).subscribe(data =>{
         this.fleet = data;
+        this._ReservacionService.reservacion.fleetId =data[0].id;;
+        this._ConfigService.getVehicles(data[0].id).subscribe(data =>{
+          this.vehicles = data;
+        })
       });
-      this._ConfigService.getVehicles(this._ReservacionService.reservacion.fleetId).subscribe(data =>{
-        console.log(data);
-        this.vehicles = data;
-      })
+
     }
     OnDestroy() {
       this._ReservacionService.reservacion = null;
     }
     SelectFleet(idx:number){
+      this._ReservacionService.reservacion.fleetId = idx;
       this.fleetService.getFleet(idx,this._ReservacionService.reservacion.CountryId)
         .subscribe( data => {
           this.fleet=data;
@@ -56,5 +60,8 @@ export class FleetReservacionComponent implements OnInit {
          .subscribe( data => {
            this.fleet=data;
          });
+      }
+      ngOnDestroy(){
+        this._ConfigService.ruta = 'home';
       }
   }

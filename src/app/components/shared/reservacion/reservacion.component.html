@@ -3,7 +3,7 @@
   <h5 class="titleReservation">Alquiler/reserva Online</h5>
   <form [formGroup]="formulario" (ngSubmit)="reservacionSearch()" class="formReservacion">
   <div class="row">
-    <div class="col-md-6" style="display:none">
+    <div class="col-md-6">
       <div class="form-group bd-search " [ngClass]="{ 'has-danger': formulario.get('countryId').errors?.required && !formulario.get('countryId').untouched }">
         <label for="countryId" class="h-25">País</label>
         <select class="custom-select form-control form-control-sm"
@@ -25,26 +25,22 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="formulario.get('cityId').value && _reservacionService.opcionesReturn.length > 0 && formulario.get('returnDiferent').value != true">
-      <div class="form-group bd-search" [ngClass]="{ 'has-danger': formulario.get('returnCityId').errors?.returnLocationValid && formulario.get('returnCityId').untouched }">
-        <label for="returnCityId">Lugar de retorno</label>
-        <select class="custom-select form-control form-control-sm h-25"
-                   formControlName="returnCityId">
-          <option  value="" selected>Lugar de retorno</option>
-          <option [value]="city.city" *ngFor="let city of _reservacionService.opcionesReturn">{{ city.name }}</option>
-        </select>
-
-               <div  *ngIf="formulario.get('returnDiferent').errors?.returnLocationValid && !formulario.get('ReturnLocation').untouched " class="form-control-feedback">
-                El lugar de retorno es requerido
-               </div>
-      </div>
-    </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
       <div class="form-group ">
         <input type="checkbox" formControlName="returnDiferent">
         <label for="returnDiferent" class="devolucionLabel">Devolución en la misma oficina</label>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf="formulario.get('cityId').value && _reservacionService.opcionesReturn.length > 0 && formulario.get('returnDiferent').value != true">
+      <div class="form-group bd-search" [ngClass]="{ 'has-danger': formulario.get('returnCityId').errors?.returnLocationValid }">
+       <label for="returnCityId">Lugar de retorno</label>
+       <select class="custom-select form-control form-control-sm h-25"
+                   formControlName="returnCityId">
+          <option  value="" selected>Lugar de retorno</option>
+          <option [value]="city.city" *ngFor="let city of _reservacionService.opcionesReturn">{{ city.name }}</option>
+       </select>
       </div>
     </div>
   </div>
@@ -53,7 +49,7 @@
      <div class="col-lg-6">
         <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('InitDate').errors?.required && !formulario.get('InitDate').untouched}">
           <label for="PickUpDate">Fecha de inicio</label>
-          <input type="datetime-local"
+          <input type="date"
                 class="form-control form-control-sm h-25"
                 formControlName="InitDate"
                 min="{{ today | amDateFormat: 'YYYY-MM-DD HH:mm:ss' }}">
@@ -67,7 +63,7 @@
         <div class="col-lg-6">
           <div class="form-group" [ngClass]="{ 'has-danger': formulario.get('ReturnDate').errors?.required && !formulario.get('ReturnDate').untouched}">
             <label for="ReturnDate">Fecha de retorno</label>
-            <input type="datetime-local"
+            <input type="date"
                    class="form-control form-control-sm h-25"
                    formControlName="ReturnDate"
                    min="{{ formulario.get('InitDate').value  }}">

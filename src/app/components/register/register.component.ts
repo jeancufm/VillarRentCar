@@ -60,7 +60,7 @@ export class RegisterComponent {
             ()=>{
               this.userService.validMail(control.value).subscribe(data =>{
               let response = data.json();
-              if(response.respuesta === "KO")
+              if(response.length > 0)
               {
                 resolve({existe:true});
               }else{

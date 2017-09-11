@@ -14,7 +14,7 @@ export class FleetService {
   VehiclesInfo:any;
 
   urlBusqueda:string = "../assets/json/fleet.json"
-  UrlApi:string = "http://localhost:90/VillaCarApi/"
+  UrlApi:string = "http://localhost/VillaCarApi/"
   constructor(private http:Http) {}
   getFleet(id:number = 1, country:number){
     return this.http.get(this.urlBusqueda)

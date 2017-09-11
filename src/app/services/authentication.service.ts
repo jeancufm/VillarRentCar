@@ -36,7 +36,7 @@ export class AuthenticationService {
       if (localStorage.getItem('currentUser'))
       {
         let role = localStorage.getItem('currentUser');
-         return JSON.parse(role).rol;
+         return JSON.parse(role).Rol;
       }
     }
     public getProfile(){

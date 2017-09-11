@@ -10,7 +10,7 @@
         <h6 class="text-primary">Flotas de vehiculos</h6>
             <select class="btn btn-secondary dropdown-toggle" (change)="SelectFleet($event.target.value)">
             <option  [value]="item.id"
-                     [selected]= "item.name == _ReservacionService.reservacion.fleetId"
+                     [selected]= "item.name == _ReservacionService.reservacion.id"
                      *ngFor="let item of fleet">{{ item.name }}</option>
           </select>
       </div>

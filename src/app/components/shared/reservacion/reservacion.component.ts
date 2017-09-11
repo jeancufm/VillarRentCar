@@ -68,12 +68,20 @@ export class ReservacionComponent implements OnInit {
           return {
             returnLocationValid:true
           }
+        }else{
+          return{
+            returnLocationValid:false
+          }
         }
 
+      }else{
+        return {
+          returnLocationValid:true
+        }
       }
-        return null;
   }
   reservacionSearch(){
+    console.log(this.formulario.value);
     this._reservacionService.reservacion.CountryId = this.formulario.controls['countryId'].value;
     this._reservacionService.reservacion.CityId = this.formulario.controls['cityId'].value;
     this._reservacionService.reservacion.InitDate = this.formulario.controls['InitDate'].value;

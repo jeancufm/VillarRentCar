@@ -7,54 +7,48 @@
    </a>
   <div class="collapse navbar-collapse " id="navbarText">
     <ul class="navbar-nav mr-autoModif">
-      <li class="nav-item" routerLinkActive="activo">
+      <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="['home']">
               <span class="nav-link letterNavBar">Inicio</span>
           </a>
       </li>
-      <li class="nav-item" routerLinkActive="activo">
-          <a [routerLink]="['fleet']">
-              <span class="nav-link letterNavBar">Tarifas y Reservas</span>
-          </a>
-      </li>
-
-      <li class="nav-item" routerLinkActive="activo">
+      <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="['fleet']">
               <span class="nav-link letterNavBar">Flota</span>
           </a>
       </li>
-      <li class="nav-item" routerLinkActive="activo">
+      <li class="nav-link dropdown" *ngIf="_authenticationService.authenticated() &&
+                                          _authenticationService.getRole() != 'Normal'">
+        <a class="dropdown-toggle letterNavBar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administradores</a>
+        <div class="dropdown-menu ">
+          <a [routerLink]="['operaciones/reservacion']" *ngIf="_authenticationService.authenticated() &&
+                                              ( _authenticationService.getRole() == 'AdminGlobal' ||
+                                                _authenticationService.getRole() == 'Operaciones' )">
+              <span class="nav-link letterNavBar">Operciones</span>
+          </a>
+          <a [routerLink]="['adminClub/Promotores']" *ngIf="_authenticationService.authenticated() &&
+                                              ( _authenticationService.getRole() == 'AdminGlobal' ||
+                                                _authenticationService.getRole() == 'AdminClub')">
+              <span class="nav-link letterNavBar">Admin Club</span>
+          </a>
+          <a [routerLink]="['adminFleet/country']" *ngIf="_authenticationService.authenticated() &&
+                                              (_authenticationService.getRole() == 'AdminGlobal' ||
+                                               _authenticationService.getRole() == 'AdminFlota')">
+              <span class="nav-link letterNavBar">Admin Flota</span>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="['fleet']">
               <span class="nav-link letterNavBar">Oficinas</span>
           </a>
       </li>
-      <li class="nav-item" routerLinkActive="activo">
+      <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="['fleet']">
               <span class="nav-link letterNavBar">Contacto</span>
           </a>
       </li>
-      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
-                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
-                                                             _authenticationService.getRole() == 'AdminFlota' )">
-          <a [routerLink]="['adminFleet/country']">
-              <span class="nav-link letterNavBar">Admin Flota</span>
-          </a>
-      </li>
-      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
-                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
-                                                             _authenticationService.getRole() == 'AdminClub' )">
-          <a [routerLink]="['adminClub/Promotores']">
-              <span class="nav-link letterNavBar">Admin Club</span>
-          </a>
-      </li>
-      <li class="nav-item" routerLinkActive="activo" *ngIf="_authenticationService.authenticated() &&
-                                                            (_authenticationService.getRole() == 'AdminGlobal' ||
-                                                             _authenticationService.getRole() == 'operaciones' )">
-          <a [routerLink]="['operaciones/reservacion']">
-              <span class="nav-link letterNavBar">Operciones</span>
-          </a>
-      </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!_authenticationService.authenticated()">
           <div class="dropdown" *ngIf="language == 'es'">
             <button class="dropdown-toggle languaje" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <span class="nav-link letterNavBar">{{ language | uppercase }}</span>

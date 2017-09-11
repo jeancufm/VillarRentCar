@@ -6,16 +6,33 @@ import 'rxjs/add/operator/map';
 export class ConfigService {
 
   constructor(private http:Http) { }
-  urlBusqueda:string = "http://localhost:90/VillaCarApi/"
+  urlBusqueda:string = "http://localhost/VillaCarApi/"
   city:any;
   typeFleet:any;
   reservation:any;
+  ruta:string;
   getCountry(){
     let query = "country.php";
     let url = this.urlBusqueda + query;
     return this.http.get(url)
     .map( resp=>{
       return resp.json();
+    });
+  }
+  getPromotors(){
+    let query = "promotors.php";
+    let url = this.urlBusqueda + query;
+    return this.http.get(url)
+    .map( resp=>{
+      return resp.json();
+    });
+  }
+  getPromotorById(id:number){
+    let query = "promotors.php";
+    let url = this.urlBusqueda + query;
+    return this.http.get(url)
+    .map( resp=>{
+      return resp.json()[0];
     });
   }
   getCountryById(id:number){
@@ -169,11 +186,11 @@ export class ConfigService {
     let url = this.urlBusqueda + query;
     return this.http.post(url,country)
       .map( resp=>{
-        if (resp.json().Fallo != undefined)
+        if (!resp)
         {
           return null;
         }
-        return resp.json();
+        return resp;
       });
   }
   setCity(city:any){
@@ -181,11 +198,23 @@ export class ConfigService {
     let url = this.urlBusqueda + query;
     return this.http.post(url,city)
       .map( resp=>{
-        if (resp.json().Fallo != undefined)
+        if (!resp)
         {
           return null;
         }
-        return resp.json();
+        return resp;
+      });
+  }
+  setPromotorData(datosPromotor:any){
+    let query = "promotorUpdate.php";
+    let url = this.urlBusqueda + query;
+    return this.http.post(url,datosPromotor)
+      .map( resp=>{
+        if (!resp)
+        {
+          return null;
+        }
+        return resp;
       });
   }
   setTypeFleet(typeFleet:any){
@@ -193,11 +222,11 @@ export class ConfigService {
     let url = this.urlBusqueda + query;
     return this.http.post(url,typeFleet)
       .map( resp=>{
-        if (resp.json().Fallo != undefined)
+        if (!resp)
         {
           return null;
         }
-        return resp.json();
+        return resp;
       });
   }
   setVehicles(vehicles:any, archivos:File[]){
@@ -212,11 +241,11 @@ export class ConfigService {
     let url = this.urlBusqueda + query;
     return this.http.post(url,formData)
       .map( resp=>{
-        if (resp.json().Fallo != undefined)
+        if (!resp)
         {
           return null;
         }
-        return resp.json();
+        return resp;
       });
   }
   getStatus(id:number = 0){

@@ -59,9 +59,7 @@ export class FormCityComponent  {
               }
 
     submit() {
-      console.log(this.formulario.value);
       this.loading=true;
-      //console.log(this.formulario.value);
       this._config.setCity(this.formulario.value).subscribe(()=>{
         this.loading=false;
       });

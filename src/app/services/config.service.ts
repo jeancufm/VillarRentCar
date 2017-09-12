@@ -35,6 +35,14 @@ export class ConfigService {
       return resp.json()[0];
     });
   }
+  getReferidoById(id:number){
+    let query = "referidos.php";
+    let url = this.urlBusqueda + query;
+    return this.http.get(url)
+    .map( resp=>{
+      return resp.json()[0];
+    });
+  }
   getCountryById(id:number){
     let query = "country.php?id="+id;
     let url = this.urlBusqueda + query;
@@ -217,6 +225,18 @@ export class ConfigService {
         return resp;
       });
   }
+  setReferidorData(datosPromotor:any){
+    let query = "referidorUpdate.php";
+    let url = this.urlBusqueda + query;
+    return this.http.post(url,datosPromotor)
+      .map( resp=>{
+        if (!resp)
+        {
+          return null;
+        }
+        return resp;
+      });
+  }
   setTypeFleet(typeFleet:any){
     let query = "typeFleetRegisterUpdate.php";
     let url = this.urlBusqueda + query;
@@ -259,5 +279,13 @@ export class ConfigService {
         }
         return resp.json();
       });
+  }
+  getReferidores(){
+    let query = "referidos.php";
+    let url = this.urlBusqueda + query;
+    return this.http.get(url)
+    .map( resp=>{
+      return resp.json();
+    });
   }
 }

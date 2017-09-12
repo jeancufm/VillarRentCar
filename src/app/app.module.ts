@@ -43,6 +43,7 @@ import { PromotorComponent } from './components/admin-club/promotor/promotor.com
 import { UserComponent } from './components/admin-club/user/user.component';
 import { FormPromotorComponent } from './components/admin-club/promotor/form-promotor/form-promotor.component';
 import { WizardComponent } from './components/shared/wizard/wizard.component';
+import { FormUserComponent } from './components/admin-club/user/form-user/form-user.component';
 
 @NgModule({
     imports: [
@@ -83,7 +84,8 @@ import { WizardComponent } from './components/shared/wizard/wizard.component';
         PromotorComponent,
         UserComponent,
         FormPromotorComponent,
-        WizardComponent
+        WizardComponent,
+        FormUserComponent
     ],
     providers: [
         AuthGuard,
